@@ -3,5 +3,18 @@
     <div class="curtain curtain-right" [style.background-color]="curtainColor" [class.open]="curtainOpened"></div>
     <div class="content" [class.show]="curtainOpened">
         <p>{{ displayText }}</p>
+        <div *ngIf="curtainColor === '#8B548F'">
+            <h1>Dit is de titel voor de paarse inhoud.</h1>
+        </div>
+        <div *ngIf="curtainColor === '#BB4848'">
+            <h1>Dit is de titel voor de rode inhoud.</h1>
+        </div>
+        <div *ngIf="curtainColor === '#00BA85'">
+            <h1>Dit is de titel voor de Groene inhoud.</h1>
+        </div>
+        <div *ngIf="curtainColor === '#1F1A65'">
+            <h1>Dit is de titel voor de Blauwe inhoud.</h1>
+        </div>
+
     </div>
 </div>

@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-replay',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './replay.component.html',
   styleUrl: './replay.component.scss'
 })
 export class ReplayComponent {
-  curtainColors = ['#8B548F', '#BB4848', '#00BA85', '#1F1A65']; // Paars, Rood, Groen, Blauw
+  curtainColors = ['#8B548F', '#8B548F', '#BB4848', '#00BA85', '#1F1A65']; // Paars, Rood, Groen, Blauw
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
   curtainOpened = false;
