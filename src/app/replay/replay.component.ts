@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './replay.component.scss'
 })
 export class ReplayComponent {
-  curtainColors = ['#8B548F', '#8B548F', '#BB4848', '#00BA85', '#1F1A65']; // Paars, Rood, Groen, Blauw
+  curtainColors = ['#8B548F', '#BB4848', '#00BA85', '#1F1A65']; // Paars, Rood, Groen, Blauw
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
   curtainOpened = false;
@@ -26,9 +26,10 @@ export class ReplayComponent {
   openCurtains(): void {
     setTimeout(() => {
       this.curtainOpened = true;
-      this.fadeToNextColor();
       setTimeout(() => this.closeCurtains(), 5000);
     }, 3000);
+
+
   }
 
   fadeToNextColor(): void {
@@ -38,7 +39,10 @@ export class ReplayComponent {
 
   closeCurtains(): void {
     this.curtainOpened = false;
-    setTimeout(() => this.openCurtains(), 1000);
+    setTimeout(() => {
+      this.openCurtains(),
+        setTimeout(() => this.fadeToNextColor(), 3000);
+    }, 1000);
   }
 
 }

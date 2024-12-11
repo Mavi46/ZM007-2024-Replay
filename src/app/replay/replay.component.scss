@@ -10,7 +10,6 @@
     height: 100%;
     width: 100%;
     background-color: black;
-    /* Zwarte achtergrond */
 }
 
 .curtain {
@@ -21,29 +20,24 @@
     transition: transform 1s ease-in-out, background-color 1.5s ease-in-out;
     z-index: 2;
     transform-origin: bottom center;
-    /* Rotatiepunt naar de onderkant van het gordijn */
 }
 
 .curtain-left {
     left: 0;
     transform: translateX(0) rotate(0deg);
-    /* Start recht */
 }
 
 .curtain-right {
     right: 0;
     transform: translateX(0) rotate(0deg);
-    /* Start recht */
 }
 
 .curtain.open.curtain-left {
-    transform: translateX(-95%) rotate(10deg) scaleY(1.1);
-    /* Draai naar buiten en vergroot de hoogte */
+    transform: translateX(-95%) rotate(10deg) scaleY(1.5);
 }
 
 .curtain.open.curtain-right {
     transform: translateX(95%) rotate(-10deg) scaleY(1.1);
-    /* Draai naar buiten en vergroot de hoogte */
 }
 
 .content {
