@@ -12,8 +12,7 @@ export class ReplayComponent {
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
   curtainOpened = false;
-  displayText = 'Welkom! asdhasdhasihdgasidgaisgdiasgdahsgdhsagduhgasudasguydgsauydgasuydguyasgduyaguydsgauydguasygduygausaguydgsauydguasydguyasgduagsuydgsaudgaus';
-
+  displayText = 'Welkom!';
 
   ngOnInit(): void {
     this.startAnimationCycle();
@@ -23,22 +22,22 @@ export class ReplayComponent {
     this.openCurtains();
   }
 
-  closeCurtains(): void {
-    this.curtainOpened = false;
-    setTimeout(() => this.changeColor(), 1000);
-  }
-
-  changeColor(): void {
-    this.currentColorIndex = (this.currentColorIndex + 1) % this.curtainColors.length;
-    this.curtainColor = this.curtainColors[this.currentColorIndex];
-    this.openCurtains();
-  }
-
   openCurtains(): void {
     setTimeout(() => {
       this.curtainOpened = true;
+      this.fadeToNextColor();
       setTimeout(() => this.closeCurtains(), 5000);
     }, 3000);
+  }
+
+  fadeToNextColor(): void {
+    this.currentColorIndex = (this.currentColorIndex + 1) % this.curtainColors.length;
+    this.curtainColor = this.curtainColors[this.currentColorIndex];
+  }
+
+  closeCurtains(): void {
+    this.curtainOpened = false;
+    setTimeout(() => this.openCurtains(), 1000);
   }
 
 }
