@@ -1,0 +1,59 @@
+:host {
+    display: block;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.screen {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.curtain {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    top: 0;
+    transition: transform 1s ease-in-out;
+    z-index: 2;
+}
+
+.curtain-left {
+    left: 0;
+    transform: translateX(0);
+}
+
+.curtain-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.curtain.open.curtain-left {
+    transform: translateX(-100%);
+}
+
+.curtain.open.curtain-right {
+    transform: translateX(100%);
+}
+
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.content.show {
+    opacity: 1;
+}
