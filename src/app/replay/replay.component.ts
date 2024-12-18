@@ -21,6 +21,7 @@ export class ReplayComponent {
 
   startAnimationCycle(): void {
     this.openCurtains();
+    // this.curtainOpened = true;
   }
 
   openCurtains(): void {
