@@ -1,20 +1,101 @@
 <div class="screen">
     <div class="curtain curtain-left" [style.background-color]="curtainColor" [class.open]="curtainOpened"></div>
     <div class="curtain curtain-right" [style.background-color]="curtainColor" [class.open]="curtainOpened"></div>
-    <div class="content" [class.show]="curtainOpened">
-        <p>{{ displayText }}</p>
-        <div *ngIf="curtainColor === '#8B548F'">
-            <h1>Dit is de titel voor de paarse inhoud.</h1>
-        </div>
-        <div *ngIf="curtainColor === '#BB4848'">
-            <h1>Dit is de titel voor de rode inhoud.</h1>
-        </div>
-        <div *ngIf="curtainColor === '#00BA85'">
-            <h1>Dit is de titel voor de Groene inhoud.</h1>
-        </div>
-        <div *ngIf="curtainColor === '#1F1A65'">
-            <h1>Dit is de titel voor de Blauwe inhoud.</h1>
-        </div>
+    <div class="content grid" [class.show]="curtainOpened">
+        <div class="grid nested-grid">
+            <!-- Ruimte Links -->
+            <div class="col-2">
+                <div class="text-center p-3 border-round-sm h-full bg-primary font-bold"></div>
+            </div>
 
+            <!-- Content Paars  -->
+            <div class="col-8" *ngIf="curtainColor === '#8B548F'">
+                <div class="grid">
+                    <div class="col-6">
+                        <p>PAARS. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis turpis eget leo
+                            tincidunt
+                            suscipit et at dolor. Duis convallis, risus at efficitur rutrum, dolor ex vehicula eros, sed
+                            dapibus
+                            eros tellus ac lacus. Praesent augue neque, viverra et lorem eget, rutrum tincidunt ante.
+                            Morbi
+                            vitae quam libero.</p>
+                    </div>
+                    <div class="col-6">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis turpis eget leo tincidunt
+                            suscipit et at dolor. Duis convallis, risus at efficitur rutrum, dolor ex vehicula eros, sed
+                            dapibus
+                            eros tellus ac lacus.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Rood  -->
+            <div class="col-8" *ngIf="curtainColor === '#BB4848'">
+                <div class="grid">
+                    <div class="col-6">
+                        <p>ROOD. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis turpis eget leo
+                            tincidunt
+                            suscipit et at dolor. Duis convallis, risus at efficitur rutrum, dolor ex vehicula eros, sed
+                            dapibus
+                            eros tellus ac lacus. Praesent augue neque, viverra et lorem eget, rutrum tincidunt ante.
+                            Morbi
+                            vitae quam libero.</p>
+                    </div>
+                    <div class="col-6">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis turpis eget leo tincidunt
+                            suscipit et at dolor. Duis convallis, risus at efficitur rutrum, dolor ex vehicula eros, sed
+                            dapibus
+                            eros tellus ac lacus.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Groen  -->
+            <div class="col-8" *ngIf="curtainColor === '#00BA85'">
+                <div class="grid">
+                    <div class="col-6">
+                        <p>GROEN. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis turpis eget leo
+                            tincidunt
+                            suscipit et at dolor. Duis convallis, risus at efficitur rutrum, dolor ex vehicula eros, sed
+                            dapibus
+                            eros tellus ac lacus. Praesent augue neque, viverra et lorem eget, rutrum tincidunt ante.
+                            Morbi
+                            vitae quam libero.</p>
+                    </div>
+                    <div class="col-6">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis turpis eget leo tincidunt
+                            suscipit et at dolor. Duis convallis, risus at efficitur rutrum, dolor ex vehicula eros, sed
+                            dapibus
+                            eros tellus ac lacus.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Blauw  -->
+            <div class="col-8" *ngIf="curtainColor === '#1F1A65'">
+                <div class="grid">
+                    <div class="col-6">
+                        <p>BLAUW. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis turpis eget leo
+                            tincidunt
+                            suscipit et at dolor. Duis convallis, risus at efficitur rutrum, dolor ex vehicula eros, sed
+                            dapibus
+                            eros tellus ac lacus. Praesent augue neque, viverra et lorem eget, rutrum tincidunt ante.
+                            Morbi
+                            vitae quam libero.</p>
+                    </div>
+                    <div class="col-6">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis turpis eget leo tincidunt
+                            suscipit et at dolor. Duis convallis, risus at efficitur rutrum, dolor ex vehicula eros, sed
+                            dapibus
+                            eros tellus ac lacus.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ruimte rechts  -->
+            <div class="col-2">
+                <div class="text-center p-3 border-round-sm h-full bg-primary font-bold">Rechts</div>
+            </div>
+        </div>
     </div>
 </div>

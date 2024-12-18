@@ -6,7 +6,7 @@ import { ReplayComponent } from './replay/replay.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, ReplayComponent],
+  imports: [CommonModule, ReplayComponent, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
