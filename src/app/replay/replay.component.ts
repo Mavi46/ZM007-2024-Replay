@@ -21,9 +21,10 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ]
 })
 export class ReplayComponent {
-  curtainColors = ['#8B548F', '#BB4848', '#00BA85', '#1F1A65']; // Paars, Rood, Groen, Blauw
+  curtainColors = ['#8B548F', '#BB4848', '#00BA85', '#1F1A65']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
+  nextCurtainColor = this.curtainColors[this.currentColorIndex];
   curtainOpened = false;
   h1RotationText: string = '';
   h1State = 'in';
@@ -43,17 +44,16 @@ export class ReplayComponent {
   openCurtains(): void {
     setTimeout(() => {
       this.curtainOpened = true;
-
-      // Controleer op de huidige kleur en voer acties uit
+      this.curtainColor = this.curtainColors[this.currentColorIndex];
       if (this.curtainColor === '#8B548F') {
         this.handlePurpleTextChange();
         setTimeout(() => this.hciPopup = true, 10000);
       } else if (this.curtainColor === '#BB4848') {
         this.handleRedTextchange();
       } else if (this.curtainColor === '#00BA85') {
-        console.log("Rotatie gestart");
+        console.log("Kleur is Groen");
       } else if (this.curtainColor === '#1F1A65') {
-        console.log("Rotatie gestart");
+        console.log("Kleur is Blauw");
       }
 
 
@@ -63,14 +63,17 @@ export class ReplayComponent {
 
   fadeToNextColor(): void {
     this.currentColorIndex = (this.currentColorIndex + 1) % this.curtainColors.length;
-    this.curtainColor = this.curtainColors[this.currentColorIndex];
+    this.nextCurtainColor = this.curtainColors[this.currentColorIndex];
   }
 
   closeCurtains(): void {
+    if (this.currentColorIndex === this.curtainColors.length - 1) {
+      return;
+    }
     this.curtainOpened = false;
+    this.fadeToNextColor();
     setTimeout(() => {
-      this.openCurtains(),
-        setTimeout(() => this.fadeToNextColor(), 3000);
+      this.openCurtains()
     }, 1000);
   }
 
@@ -85,30 +88,12 @@ export class ReplayComponent {
 
   handleRedTextchange(): void {
     const redTexts = [
-      'Rood tekst 1',
-      'Rood tekst 2',
-      'Rood tekst 3'
+      'Software Engineering',
+      'Nu kunnen we dit',
     ];
 
     this.startTextRotation(redTexts);
   }
-
-
-
-
-  // startTextRotation(texts: string[]): void {
-  //   let currentIndex = 0;
-  //   this.h1RotationText = texts[currentIndex];
-
-  //   const textInterval = setInterval(() => {
-  //     currentIndex++;
-  //     if (currentIndex >= texts.length) {
-  //       clearInterval(textInterval);
-  //     } else {
-  //       this.h1RotationText = texts[currentIndex];
-  //     }
-  //   }, 3500);
-  // }
 
   startTextRotation(texts: string[]): void {
     let currentIndex = 0;
