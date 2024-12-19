@@ -11,20 +11,9 @@
             <!-- Content Paars  -->
             <div class="col-8" *ngIf="curtainColor === '#8B548F'">
                 <div class="grid">
-                    <div class="col-6">
-                        <p>PAARS. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis turpis eget leo
-                            tincidunt
-                            suscipit et at dolor. Duis convallis, risus at efficitur rutrum, dolor ex vehicula eros, sed
-                            dapibus
-                            eros tellus ac lacus. Praesent augue neque, viverra et lorem eget, rutrum tincidunt ante.
-                            Morbi
-                            vitae quam libero.</p>
-                    </div>
-                    <div class="col-6">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis turpis eget leo tincidunt
-                            suscipit et at dolor. Duis convallis, risus at efficitur rutrum, dolor ex vehicula eros, sed
-                            dapibus
-                            eros tellus ac lacus.</p>
+                    <div class="col-12">
+                        <h1 class="h1-hci text-center" [@slideInOut]="h1State">{{h1RotationText}}</h1>
+                        <h1 class="h1-hci text-center" *ngIf="hciPopup">POPUP</h1>
                     </div>
                 </div>
             </div>
@@ -32,20 +21,8 @@
             <!-- Content Rood  -->
             <div class="col-8" *ngIf="curtainColor === '#BB4848'">
                 <div class="grid">
-                    <div class="col-6">
-                        <p>ROOD. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis turpis eget leo
-                            tincidunt
-                            suscipit et at dolor. Duis convallis, risus at efficitur rutrum, dolor ex vehicula eros, sed
-                            dapibus
-                            eros tellus ac lacus. Praesent augue neque, viverra et lorem eget, rutrum tincidunt ante.
-                            Morbi
-                            vitae quam libero.</p>
-                    </div>
-                    <div class="col-6">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis turpis eget leo tincidunt
-                            suscipit et at dolor. Duis convallis, risus at efficitur rutrum, dolor ex vehicula eros, sed
-                            dapibus
-                            eros tellus ac lacus.</p>
+                    <div class="col-12">
+                        <h1 class="h1-se text-center">{{h1RotationText}}</h1>
                     </div>
                 </div>
             </div>
@@ -94,7 +71,7 @@
 
             <!-- Ruimte rechts  -->
             <div class="col-2">
-                <div class="text-center p-3 border-round-sm h-full bg-primary font-bold">Rechts</div>
+                <div class="text-center p-3 border-round-sm h-full bg-primary font-bold"></div>
             </div>
         </div>
     </div>
