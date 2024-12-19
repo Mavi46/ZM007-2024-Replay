@@ -13,7 +13,12 @@
                 <div class="grid">
                     <div class="col-12">
                         <h1 class="h1-hci text-center" [@slideInOut]="h1State">{{h1RotationText}}</h1>
-                        <h1 class="h1-hci text-center" *ngIf="hciPopup">POPUP</h1>
+                        <div class="container-hci" *ngIf="hciPopup">
+                            <div class="popup-hci">
+                                <h1>John Doe</h1>
+                                <h1>johndoe&#64;mail.com</h1>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

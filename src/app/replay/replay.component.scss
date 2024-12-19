@@ -1,8 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 :host {
     display: block;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
 }
 
 .screen {
@@ -78,11 +84,28 @@
 }
 
 // Styling per scherm
+// Paars HCI
 .h1-hci {
     margin-top: 20%;
     font-size: 50px;
 }
 
+.popup-hci {
+    background-color: gray;
+    border-radius: 20px;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    display: inline-block;
+    /* Zorgt dat de breedte zich aanpast aan de inhoud */
+}
+
+.container-hci {
+    text-align: center;
+}
+
+
+// Rood Software Engineering 
 .h1-se {
     margin-top: 20%;
     font-size: 100px;
