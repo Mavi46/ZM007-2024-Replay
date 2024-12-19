@@ -70,3 +70,20 @@
 .content.show {
     opacity: 1;
 }
+
+
+// Tweaken van de breedte als er een col-12 div is toegepast
+.nested-grid {
+    width: 100%;
+}
+
+// Styling per scherm
+.h1-hci {
+    margin-top: 20%;
+    font-size: 50px;
+}
+
+.h1-se {
+    margin-top: 20%;
+    font-size: 100px;
+}
