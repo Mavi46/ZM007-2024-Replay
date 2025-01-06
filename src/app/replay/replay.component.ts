@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { TypewriterDirective } from '../directives/typewriter.directive';
 
 @Component({
   selector: 'app-replay',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TypewriterDirective],
   templateUrl: './replay.component.html',
   styleUrl: './replay.component.scss',
   animations: [
@@ -22,6 +23,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class ReplayComponent {
   curtainColors = ['#8B548F', '#BB4848', '#00BA85', '#1F1A65']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
+  // curtainColors = ['#BB4848']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
   nextCurtainColor = this.curtainColors[this.currentColorIndex];
@@ -31,6 +33,11 @@ export class ReplayComponent {
 
   // Scherm HCI
   hciPopup: boolean = false;
+
+  // Scherm SE
+  typedScriptName: string = '';
+  typedScriptContent: string = '';
+
 
   ngOnInit(): void {
     this.startAnimationCycle();
@@ -93,7 +100,28 @@ export class ReplayComponent {
     ];
 
     this.startTextRotation(redTexts);
+
+    // Bereken de tijd voor de tekstrotatie om te starten met de typewriting
+    const rotationDuration = 3500 * redTexts.length; // 3500ms per tekst
+    setTimeout(() => {
+      this.typedScriptName = 'run webscraping.py';
+      setTimeout(() => {
+        this.typedScriptContent = `
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://example.com/profile/janedoe123"
+pagina = requests.get(url)
+soup = BeautifulSoup(pagina.text, "html.parser")
+
+naam = soup.find("span", class_="name").text
+email = soup.find("a", class_="email").text
+
+requests.post(post_url, json=data)`;
+      }, this.typedScriptName.length * 50);
+    }, rotationDuration); // Start de typewriting na de tekstrotatie
   }
+
 
   startTextRotation(texts: string[]): void {
     let currentIndex = 0;

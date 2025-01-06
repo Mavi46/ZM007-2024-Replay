@@ -97,7 +97,6 @@ body {
     padding: 20px;
     margin-top: 20px;
     display: inline-block;
-    /* Zorgt dat de breedte zich aanpast aan de inhoud */
 }
 
 .container-hci {
@@ -109,4 +108,22 @@ body {
 .h1-se {
     margin-top: 20%;
     font-size: 100px;
+}
+
+.popup-se {
+    background-color: gray;
+    border-radius: 20px;
+    // text-align: center;
+    padding: 0px 30px 0px 30px;
+    margin-top: 20px;
+    display: inline-block;
+    font-family: monospace;
+}
+
+.popup-se.scriptcontent {
+    padding: 0px 30px 20px 30px;
+}
+
+.container-seScriptname {
+    text-align: right;
 }
