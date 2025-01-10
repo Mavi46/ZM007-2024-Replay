@@ -1,7 +1,7 @@
 <div class="screen">
     <div class="curtain curtain-left" [style.background-color]="curtainColor" [class.open]="curtainOpened"></div>
     <div class="curtain curtain-right" [style.background-color]="curtainColor" [class.open]="curtainOpened"></div>
-    <div class="content grid" [class.show]="curtainOpened">
+    <div class="content grid" [class.show]="curtainOpened" *ngIf="userProfile">
         <div class="grid nested-grid">
             <!-- Ruimte Links -->
             <div class="col-2">
@@ -15,8 +15,8 @@
                         <h1 class="h1-hci text-center" [@slideInOut]="h1State">{{h1RotationText}}</h1>
                         <div class="container-hci" *ngIf="hciPopup">
                             <div class="popup-hci">
-                                <h1>John Doe</h1>
-                                <h1>johndoe&#64;mail.com</h1>
+                                <h1>{{userProfile.name}}</h1>
+                                <h1>{{userProfile.email}}</h1>
                             </div>
                         </div>
                     </div>
@@ -31,41 +31,27 @@
                     </div>
                     <div class="col-12 flex justify-content-end">
                         <div class="popup-se" *ngIf="typedScriptName">
-                            <h2>
-                                <pre [typewriter]="typedScriptName" [speed]="50" style="white-space: pre-wrap;"></pre>
-                            </h2>
+                            <!-- <h2> -->
+                            <pre [typewriter]="typedScriptName" [speed]="50" style="white-space: pre-wrap;"></pre>
+                            <!-- </h2> -->
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="popup-se scriptcontent" *ngIf="typedScriptContent">
-                            <h2>
-                                <pre [typewriter]="typedScriptContent" [speed]="20"
-                                    style="white-space: pre-wrap;"></pre>
-                            </h2>
+                            <!-- <h2> -->
+                            <pre [typewriter]="typedScriptContent" [speed]="20" style="white-space: pre-wrap;"></pre>
+                            <!-- </h2> -->
                         </div>
                     </div>
                 </div>
             </div>
 
-
-
             <!-- Content Groen  -->
             <div class="col-8" *ngIf="curtainColor === '#00BA85'">
                 <div class="grid">
-                    <div class="col-6">
-                        <p>GROEN. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis turpis eget leo
-                            tincidunt
-                            suscipit et at dolor. Duis convallis, risus at efficitur rutrum, dolor ex vehicula eros, sed
-                            dapibus
-                            eros tellus ac lacus. Praesent augue neque, viverra et lorem eget, rutrum tincidunt ante.
-                            Morbi
-                            vitae quam libero.</p>
-                    </div>
-                    <div class="col-6">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis turpis eget leo tincidunt
-                            suscipit et at dolor. Duis convallis, risus at efficitur rutrum, dolor ex vehicula eros, sed
-                            dapibus
-                            eros tellus ac lacus.</p>
+                    <div class="col-12">
+                        <h1 class="h1-de text-center" [@slideInOut]="h1State">{{h1RotationText}}
+                        </h1>
                     </div>
                 </div>
             </div>
@@ -74,19 +60,9 @@
             <div class="col-8" *ngIf="curtainColor === '#1F1A65'">
                 <div class="grid">
                     <div class="col-6">
-                        <p>BLAUW. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis turpis eget leo
-                            tincidunt
-                            suscipit et at dolor. Duis convallis, risus at efficitur rutrum, dolor ex vehicula eros, sed
-                            dapibus
-                            eros tellus ac lacus. Praesent augue neque, viverra et lorem eget, rutrum tincidunt ante.
-                            Morbi
-                            vitae quam libero.</p>
+                        <h1 class="h1-hci text-center" [@slideInOut]="h1State">{{h1RotationText}}</h1>
                     </div>
                     <div class="col-6">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis turpis eget leo tincidunt
-                            suscipit et at dolor. Duis convallis, risus at efficitur rutrum, dolor ex vehicula eros, sed
-                            dapibus
-                            eros tellus ac lacus.</p>
                     </div>
                 </div>
             </div>
