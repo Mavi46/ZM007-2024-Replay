@@ -31,9 +31,6 @@ export interface UserProfile {
     name: string;
     email: string;
     status: string;
-    info: string;
-    experience: Experience[];
-    courses: Course[];
     text1: string;
     text2: string;
     text3: string;
