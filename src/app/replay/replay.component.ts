@@ -25,8 +25,8 @@ import { ReplayService } from '../services/replay.service';
   ]
 })
 export class ReplayComponent {
-  // curtainColors = ['#8B548F', '#BB4848', '#00BA85', '#1F1A65']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
-  curtainColors = ['#8B548F']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
+  curtainColors = ['#8B548F', '#BB4848', '#00BA85', '#1F1A65']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
+  // curtainColors = ['#8B548F']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
   nextCurtainColor = this.curtainColors[this.currentColorIndex];
@@ -86,8 +86,8 @@ export class ReplayComponent {
   }
 
   startAnimationCycle(): void {
-    // this.openCurtains();
-    this.curtainOpened = true;
+    this.openCurtains();
+    // this.curtainOpened = true;
   }
 
   openCurtains(): void {
