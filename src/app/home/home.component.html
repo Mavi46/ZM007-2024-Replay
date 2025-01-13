@@ -1,35 +1,20 @@
-<p>home works!</p>
-<a routerLink="/replay">Ga naar replay -></a>
-<button>HHH</button>
-
-
 <div class="grid">
-    <div class="col">
-        <div class="text-center p-3 border-round-sm bg-primary font-bold">1</div>
+    <div class="col-2">
     </div>
-    <div class="col">
-        <div class="text-center p-3 border-round-sm bg-primary font-bold ">2</div>
+    <div class="col-8">
+        <div *ngIf="isLoading">Loading profiles...</div>
+        <div *ngIf="error">{{ error }}</div>
+
+        <div *ngIf="!isLoading && userProfiles.length">
+            <div class="profile-card" *ngFor="let profile of userProfiles; let i = index">
+                <h2>{{ profile.name }} <i (click)="startReplay(i)" class="pi pi-play"
+                        style="font-size: 1rem; cursor: pointer;"></i></h2>
+                <p>Email: {{ profile.email }}</p>
+                <p>Status: {{ profile.status }}</p>
+            </div>
+        </div>
     </div>
-    <div class="col">
-        <div class="text-center p-3 border-round-sm bg-primary font-bold ">3</div>
-    </div>
-</div>
-<div class="grid">
-    <div class="col-3 p-3 border-round-sm bg-primary font-bold"> HI sdghjf ksdhgf dsgfihsdg fidhsgf idsgfiyhg sdyfgds
-        fydshg fuhgydsfHI sdghjf ksdhgf dsgfihsdg fidhsgf idsgfiyhg sdyfgds fydshg fuhgydsfHI sdghjf ksdhgf dsgfihsdg
-        fidhsgf idsgfiyhg sdyfgds fydshg fuhgydsfHI sdghjf ksdhgf dsgfihsdg fidhsgf idsgfiyhg sdyfgds fydshg fuhgydsfHI
-        sdghjf ksdhgf dsgfihsdg fidhsgf idsgfiyhg sdyfgds fydshg fuhgydsfHI sdghjf ksdhgf dsgfihsdg fidhsgf idsgfiyhg
-        sdyfgds fydshg fuhgydsfHI sdghjf ksdhgf dsgfihsdg fidhsgf idsgfiyhg sdyfgds fydshg fuhgydsfHI sdghjf ksdhgf
-        dsgfihsdg fidhsgf idsgfiyhg sdyfgds fydshg fuhgydsfHI sdghjf ksdhgf dsgfihsdg fidhsgf idsgfiyhg sdyfgds fydshg
-        fuhgydsfHI sdghjf ksdhgf dsgfihsdg fidhsgf idsgfiyhg sdyfgds fydshg fuhgydsfHI sdghjf ksdhgf dsgfihsdg fidhsgf
-        idsgfiyhg sdyfgds fydshg fuhgydsfHI sdghjf ksdhgf dsgfihsdg fidhsgf idsgfiyhg sdyfgds fydshg fuhgydsfHI sdghjf
-        ksdhgf dsgfihsdg fidhsgf idsgfiyhg sdyfgds fydshg fuhgydsfHI sdghjf ksdhgf dsgfihsdg fidhsgf idsgfiyhg sdyfgds
-        fydshg fuhgydsfHI sdghjf ksdhgf dsgfihsdg fidhsgf idsgfiyhg sdyfgds fydshg fuhgydsfHI sdghjf ksdhgf dsgfihsdg
-        fidhsgf idsgfiyhg sdyfgds fydshg fuhgydsfHI sdghjf ksdhgf dsgfihsdg fidhsgf idsgfiyhg sdyfgds fydshg fuhgydsfHI
-        sdghjf ksdhgf dsgfihsdg fidhsgf idsgfiyhg sdyfgds fydshg fuhgydsf
-    </div>
-    <div class="col-4 p-3 border-round-sm bg-primary font-bold"> BYE
-    </div>
-    <div class="col-5 p-3 border-round-sm bg-primary font-bold"> CIAO
+    <div class="col-2">
+        <i class="pi pi-sync" style="font-size: 2rem; cursor: pointer;"></i>
     </div>
 </div>

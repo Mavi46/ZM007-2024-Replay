@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { TypewriterDirective } from '../directives/typewriter.directive';
+import { UserProfile } from '../interfaces/replay-data';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ReplayService } from '../services/replay.service';
 
 @Component({
   selector: 'app-replay',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TypewriterDirective],
   templateUrl: './replay.component.html',
   styleUrl: './replay.component.scss',
   animations: [
@@ -21,18 +25,64 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ]
 })
 export class ReplayComponent {
-  curtainColors = ['#8B548F', '#BB4848', '#00BA85', '#1F1A65']; // Paars, Rood, Groen, Blauw
+  curtainColors = ['#8B548F', '#BB4848', '#00BA85', '#1F1A65']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
+  // curtainColors = ['#8B548F']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
+  nextCurtainColor = this.curtainColors[this.currentColorIndex];
   curtainOpened = false;
+
+  // Titel rotatie
   h1RotationText: string = '';
   h1State = 'in';
+
+  //User Profile
+  userProfile!: UserProfile | null;
 
   // Scherm HCI
   hciPopup: boolean = false;
 
+  // Scherm SE
+  typedScriptName: string = '';
+  typedScriptContent: string = '';
+
+  constructor(private route: ActivatedRoute, private router: Router, private replayService: ReplayService) { }
+
   ngOnInit(): void {
-    this.startAnimationCycle();
+    this.route.queryParams.subscribe(params => {
+      const id = +params['id'];  // uit querystring ?id=1
+      console.log('Index uit query params:', id);
+
+      if (!isNaN(id)) {
+        // Haal de data asynchroon op en sla het in userProfile op
+        this.replayService.getUserProfileByIndex(id).subscribe({
+          next: (profile) => {
+            if (profile) {
+              this.userProfile = profile;
+              window.addEventListener('keydown', this.onKeyDown.bind(this));
+              this.startAnimationCycle();
+            } else {
+              // Geen geldig profiel; navigeer eventueel terug
+              this.router.navigate(['/']);
+            }
+          },
+          error: (err) => {
+            console.error('Fout bij ophalen profiel:', err);
+            this.router.navigate(['/']);
+          }
+        });
+      } else {
+        // Als id geen getal is
+        this.router.navigate(['/']);
+      }
+    });
+  }
+
+  onKeyDown(event: KeyboardEvent): void {
+    if (event.code === 'Space' || event.key === ' ') {
+      event.preventDefault();
+      this.h1RotationText = 'Op de spatiebalk geklikt!';
+    }
   }
 
   startAnimationCycle(): void {
@@ -43,72 +93,104 @@ export class ReplayComponent {
   openCurtains(): void {
     setTimeout(() => {
       this.curtainOpened = true;
-
-      // Controleer op de huidige kleur en voer acties uit
+      this.curtainColor = this.curtainColors[this.currentColorIndex];
       if (this.curtainColor === '#8B548F') {
         this.handlePurpleTextChange();
-        setTimeout(() => this.hciPopup = true, 10000);
+        setTimeout(() => this.hciPopup = true, 20000);
       } else if (this.curtainColor === '#BB4848') {
         this.handleRedTextchange();
       } else if (this.curtainColor === '#00BA85') {
-        console.log("Rotatie gestart");
+        this.handleGreenTextChange();
       } else if (this.curtainColor === '#1F1A65') {
-        console.log("Rotatie gestart");
+        this.handleBlueTextChange();
       }
 
 
-      setTimeout(() => this.closeCurtains(), 15000);
+      setTimeout(() => this.closeCurtains(), 30000);
     }, 3000);
   }
 
   fadeToNextColor(): void {
     this.currentColorIndex = (this.currentColorIndex + 1) % this.curtainColors.length;
-    this.curtainColor = this.curtainColors[this.currentColorIndex];
+    this.nextCurtainColor = this.curtainColors[this.currentColorIndex];
   }
 
   closeCurtains(): void {
+    if (this.currentColorIndex === this.curtainColors.length - 1) {
+      return;
+    }
     this.curtainOpened = false;
+    this.fadeToNextColor();
     setTimeout(() => {
-      this.openCurtains(),
-        setTimeout(() => this.fadeToNextColor(), 3000);
+      this.openCurtains()
     }, 1000);
   }
 
   handlePurpleTextChange(): void {
     const purpleTexts = [
-      'HCI',
-      'Door onze aantrekkelijke visualisatie heb jij ons zomaar gegevens gegeven',
-      'Deze info weten we over jou'
+      'Mens-computerinteractie (MCI) is een vakgebied binnen de informatiekunde dat zich bezighoudt met onderzoek naar de interactie (wisselwerking) tussen mensen (gebruikers) en machines (waaronder computers)',
+      'Onze applicatie is ontworpen waarbij specifieke keuzes gemaakt zijn aan de hand van design principes',
+      'Met een leaderboard en spellen trekken we de aandacht van bezoekers',
+      'Hiermee hebben we nu de volgende gegevens over jou'
     ];
     this.startTextRotation(purpleTexts);
   }
 
   handleRedTextchange(): void {
     const redTexts = [
-      'Rood tekst 1',
-      'Rood tekst 2',
-      'Rood tekst 3'
+      'Software Engineering',
+      'Nu kunnen we dit',
     ];
 
     this.startTextRotation(redTexts);
+
+    // Bereken de tijd voor de tekstrotatie om te starten met de typewriting
+    const rotationDuration = 3500 * redTexts.length; // 3500ms per tekst
+    setTimeout(() => {
+      this.typedScriptName = 'run webscraping.py';
+      setTimeout(() => {
+        this.typedScriptContent = `
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://example.com/profile/janedoe123"
+pagina = requests.get(url)
+soup = BeautifulSoup(pagina.text, "html.parser")
+
+naam = soup.find("span", class_="name").text
+email = soup.find("a", class_="email").text
+
+requests.post(post_url, json=data)`;
+      }, this.typedScriptName.length * 50);
+    }, rotationDuration); // Start de typewriting na de tekstrotatie
+  }
+
+  handleGreenTextChange(): void {
+    const userProfileName = this.userProfile?.name;
+    const text1 = this.userProfile?.text1;
+    const text2 = this.userProfile?.text2;
+    const text3 = this.userProfile?.text3;
+
+    const greenTexts = [
+      'Eens kijken wat we kunnen vinden over jou',
+      `Hallo ${userProfileName || 'gast'}`,
+      `${text1}`,
+      `${text2}`,
+      `${text3}`,
+    ];
+    this.startTextRotation(greenTexts);
+  }
+
+  handleBlueTextChange(): void {
+    const blueTexts = [
+      'tekst 1',
+      'tekst 2',
+    ];
+
+    this.startTextRotation(blueTexts);
   }
 
 
-
-
-  // startTextRotation(texts: string[]): void {
-  //   let currentIndex = 0;
-  //   this.h1RotationText = texts[currentIndex];
-
-  //   const textInterval = setInterval(() => {
-  //     currentIndex++;
-  //     if (currentIndex >= texts.length) {
-  //       clearInterval(textInterval);
-  //     } else {
-  //       this.h1RotationText = texts[currentIndex];
-  //     }
-  //   }, 3500);
-  // }
 
   startTextRotation(texts: string[]): void {
     let currentIndex = 0;
@@ -126,7 +208,7 @@ export class ReplayComponent {
       } else {
         clearInterval(textInterval);
       }
-    }, 3500);
+    }, 5000);
   }
 
 
@@ -135,8 +217,7 @@ export class ReplayComponent {
 
 
 
-
-
-
-
+  ngOnDestroy(): void {
+    window.removeEventListener('keydown', this.onKeyDown.bind(this));
+  }
 }
