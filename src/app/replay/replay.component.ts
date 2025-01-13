@@ -25,8 +25,8 @@ import { ReplayService } from '../services/replay.service';
   ]
 })
 export class ReplayComponent {
-  curtainColors = ['#8B548F', '#BB4848', '#00BA85', '#1F1A65']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
-  // curtainColors = ['#8B548F']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
+  curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#29366F']; // Paars HCI, Rood SE, Groen DataE, Blauw Security, Extra scherm
+  // curtainColors = ['#00BA85']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
   nextCurtainColor = this.curtainColors[this.currentColorIndex];
@@ -50,8 +50,7 @@ export class ReplayComponent {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      const id = +params['id'];  // uit querystring ?id=1
-      console.log('Index uit query params:', id);
+      const id = +params['id'];
 
       if (!isNaN(id)) {
         // Haal de data asynchroon op en sla het in userProfile op
@@ -94,15 +93,17 @@ export class ReplayComponent {
     setTimeout(() => {
       this.curtainOpened = true;
       this.curtainColor = this.curtainColors[this.currentColorIndex];
-      if (this.curtainColor === '#8B548F') {
+      if (this.curtainColor === '#5D275D') {
         this.handlePurpleTextChange();
         setTimeout(() => this.hciPopup = true, 20000);
-      } else if (this.curtainColor === '#BB4848') {
+      } else if (this.curtainColor === '#B13E53') {
         this.handleRedTextchange();
       } else if (this.curtainColor === '#00BA85') {
         this.handleGreenTextChange();
-      } else if (this.curtainColor === '#1F1A65') {
+      } else if (this.curtainColor === '#3B5DC9') {
         this.handleBlueTextChange();
+      } else if (this.curtainColor === '#29366F') {
+        this.handleEXTextChange();
       }
 
 
@@ -183,11 +184,20 @@ requests.post(post_url, json=data)`;
 
   handleBlueTextChange(): void {
     const blueTexts = [
-      'tekst 1',
-      'tekst 2',
+      'Blue 1',
+      'Blue 2',
     ];
 
     this.startTextRotation(blueTexts);
+  }
+
+  handleEXTextChange(): void {
+    const exTexts = [
+      'tekst extra scherm',
+      'tekst extra scherm',
+    ];
+
+    this.startTextRotation(exTexts);
   }
 
 
