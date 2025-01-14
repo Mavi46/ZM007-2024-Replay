@@ -172,13 +172,24 @@ requests.post(post_url, json=data)`;
     const text2 = this.userProfile?.text2;
     const text3 = this.userProfile?.text3;
 
-    const greenTexts = [
+    let greenTexts: string[];
+
+  if (text1 || text2 || text3) {
+    greenTexts = [
       'Eens kijken wat we kunnen vinden over jou',
       `Hallo ${userProfileName || 'gast'}`,
       `${text1}`,
       `${text2}`,
       `${text3}`,
     ];
+  } else {
+    greenTexts = [
+      'Eens kijken wat we kunnen vinden over jou',
+      `Hallo ${userProfileName || 'gast'}`,
+      'Jouw online zichtbaarheid is goed afgeschermd. Hierdoor kunnen we niks over je vinden. Wil je meer weten over onze processen, kijk gerust verder.'
+    ];
+  }
+
     this.startTextRotation(greenTexts);
   }
 
