@@ -174,7 +174,7 @@ requests.post(post_url, json=data)`;
 
     let greenTexts: string[];
 
-  if (text1 || text2 || text3) {
+  if (text1) {
     greenTexts = [
       'Eens kijken wat we kunnen vinden over jou',
       `Hallo ${userProfileName || 'gast'}`,
@@ -186,7 +186,8 @@ requests.post(post_url, json=data)`;
     greenTexts = [
       'Eens kijken wat we kunnen vinden over jou',
       `Hallo ${userProfileName || 'gast'}`,
-      'Jouw online zichtbaarheid is goed afgeschermd. Hierdoor kunnen we niks over je vinden. Wil je meer weten over onze processen, kijk gerust verder.'
+      'Oh, we kunnen helemaal niks over je vinden',
+      'Jouw online zichtbaarheid is goed afgeschermd.'
     ];
   }
 
