@@ -25,8 +25,8 @@ import { ReplayService } from '../services/replay.service';
   ]
 })
 export class ReplayComponent {
-  curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#29366F']; // Paars HCI, Rood SE, Groen DataE, Blauw Security, Extra scherm
-  // curtainColors = ['#00BA85']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
+  //curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75', '#29366F']; // Paars HCI, Rood SE, Groen DataE, Blauw Security, Geel Afsluiting, Extra scherm
+  curtainColors = ['#FFCD75']; // Paars HCI, Rood SE, Groen DataE, Blauw Security, Geel Afsluiting
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
   nextCurtainColor = this.curtainColors[this.currentColorIndex];
@@ -102,6 +102,8 @@ export class ReplayComponent {
         this.handleGreenTextChange();
       } else if (this.curtainColor === '#3B5DC9') {
         this.handleBlueTextChange();
+      } else if (this.curtainColor === '#FFCD75') {
+        this.handleYellowTextChange();
       } else if (this.curtainColor === '#29366F') {
         this.handleEXTextChange();
       }
@@ -189,6 +191,16 @@ requests.post(post_url, json=data)`;
     ];
 
     this.startTextRotation(blueTexts);
+  }
+
+  handleYellowTextChange(): void {
+    const yellowTexts = [
+      'Dit was het einde van onze ICT-ervaring. Bedankt voor je deelname!',
+      'We houden je op de hoogte als je een prijs gewonnen hebt. Houd je e-mail in de gaten voor meer informatie.',
+      'Neem gerust een kijkje bij de andere projecten die hier te zien zijn en stel je vragen als je meer wilt weten!',
+    ];
+
+    this.startTextRotation(yellowTexts);
   }
 
   handleEXTextChange(): void {
