@@ -310,10 +310,10 @@ requests.post(post_url, json=data)`;
 
   providePurpleText(): void {
     this.h1TextArray = [
-      'Mens-computerinteractie (MCI) is een vakgebied binnen de informatiekunde dat zich bezighoudt met onderzoek naar de interactie (wisselwerking) tussen mensen (gebruikers) en machines (waaronder computers)',
-      'Onze applicatie is ontworpen waarbij specifieke keuzes gemaakt zijn aan de hand van design principes',
-      'Met een leaderboard en spellen trekken we de aandacht van bezoekers',
-      'Hiermee hebben we nu de volgende gegevens over jou'
+      'Human-computer interaction (HCI) is een vakgebied binnen de informatiekunde dat zich bezighoudt met onderzoek naar de interactie (wisselwerking) tussen mensen (gebruikers) en machines (waaronder computers)',
+      'Onze applicatie is ontworpen op basis van specifieke keuzes die zijn gemaakt aan de hand van designprincipes',
+      'Met een leaderboard en spellen trekken wij de aandacht van bezoekers',
+      'Hiermee hebben wij nu de volgende gegevens over jou:'
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
@@ -321,8 +321,8 @@ requests.post(post_url, json=data)`;
 
   provideRedText(): void {
     this.h1TextArray = [
-      'Nu zijn we nieuwsgierig naar jou natuurlijk',
-      'Dit is wat we nu kunnen',
+      'Nu zijn wij natuurlijk nieuwsgierig naar jou',
+      'Dit is wat wij nu kunnen',
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
@@ -332,11 +332,15 @@ requests.post(post_url, json=data)`;
     const userProfileName = this.userProfile?.name;
 
     this.h1TextArray = [
-      'Eens kijken wat we kunnen vinden over jou',
+      'Eens kijken wat wij kunnen vinden over jou',
       `Hallo ${userProfileName}`,
-      ...(this.userProfile?.linkedIn || []),
-      'Dit was erg makkelijk te vinden',
-      'Wees altijd bewust van wat je openbaar hebt staan en wat voor gegevens je deelt',
+      ...(this.userProfile?.linkedIn?.length
+        ? [
+          ...this.userProfile.linkedIn,
+          'Dit was erg makkelijk te vinden', //Alleen als je data hebt
+          ]
+        : ['... Helaas','Wij hebben geen informatie over jou kunnen vinden', 'Blijkbaar heb jij je digitale voetafdruk goed op orde']), // Alleen als je geen data hebt
+      'Wees altijd bewust van wat je openbaar hebt staan en welke gegevens je deelt', // Altijd getoond
     ];
 
     this.h1RotationText = this.h1TextArray[0];
@@ -345,7 +349,7 @@ requests.post(post_url, json=data)`;
 
   provideBlueText(): void {
     this.h1TextArray = [
-      'Benieuwd hoe we dit gedaan hebben?',
+      'Benieuwd hoe wij dit gedaan hebben?',
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
