@@ -5,3 +5,10 @@ body {
     margin: 0;
     padding: 0;
 }
+
+* {
+    font-family: 'Roboto';
+    src: url('assets/Roboto-Bold.ttf') format('truetype');
+    font-weight: 20px;
+    font-style: normal;
+}
