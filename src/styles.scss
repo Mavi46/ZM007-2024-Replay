@@ -1,7 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
 
+* {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto-Bold.ttf') format('truetype');
+    font-weight: 20px;
+    font-style: normal;
+}
+
 body {
     margin: 0;
     padding: 0;
 }
+
+
+

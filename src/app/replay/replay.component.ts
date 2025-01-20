@@ -26,7 +26,7 @@ import { ReplayService } from '../services/replay.service';
 })
 export class ReplayComponent {
   curtainColors = ['#8B548F', '#BB4848', '#00BA85', '#1F1A65']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
-  // curtainColors = ['#8B548F']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
+  //curtainColors = ['#BB4848']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
   nextCurtainColor = this.curtainColors[this.currentColorIndex];
@@ -150,20 +150,28 @@ export class ReplayComponent {
       this.typedScriptName = 'run webscraping.py';
       setTimeout(() => {
         this.typedScriptContent = `
-import requests
-from bs4 import BeautifulSoup
+def start():
+        while True:
+            taak = checkDatabase()  # Zoek nieuwe taak
+            if taak:
+                link = zoekData(taak)  # Zoek Data
+                downloadPagina(link)  # Download pagina
+                data = verwerkPagina()  # Haal info uit pagina
+                verhaal = maakVerhaal(data) # Maak verhaal van data
+                slaOpInDatabase(data, taak)  # Sla op in database
+                maakSchoon()  # Verwijder tijdelijke bestanden
 
-url = "https://example.com/profile/janedoe123"
-pagina = requests.get(url)
-soup = BeautifulSoup(pagina.text, "html.parser")
+def maakVerhaal(gevonden_data):
+        prompt = "Geef 3 korte feitjes op basis van: " + gevonden_data
+        response = vraagAI(prompt) # AI maakt verhaalvorm
+        return response["inhoud"]
 
-naam = soup.find("span", class_="name").text
-email = soup.find("a", class_="email").text
-
-requests.post(post_url, json=data)`;
+start():`;
+            
       }, this.typedScriptName.length * 50);
     }, rotationDuration); // Start de typewriting na de tekstrotatie
   }
+
 
   handleGreenTextChange(): void {
     const userProfileName = this.userProfile?.name;
@@ -210,9 +218,6 @@ requests.post(post_url, json=data)`;
       }
     }, 5000);
   }
-
-
-
 
 
 
