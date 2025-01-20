@@ -13,7 +13,6 @@ export class ReplayService {
   constructor(private http: HttpClient) { }
 
   getAllUserProfiles(): Observable<UserProfile[]> {
-    console.log('Get called.');
     if (this.profilesCache.length > 0) {
       return of(this.profilesCache);
     }
@@ -31,9 +30,11 @@ export class ReplayService {
           name: 'Reinier Geppaard',
           email: 'reinier@gmail.com',
           status: 'done',
-          text1: 'Oh, dus jij bent Reinier Geppaard, de student die ...',
-          text2: 'Dus, je streeft ernaar om processen en taken te automatiseren ...',
-          text3: 'En daar ga je dan, Reinier Geppaard, met je inspiratie om processen ...',
+          linkedIn: [
+            'Oh, dus jij bent Reinier Geppaard, de student die al sinds zijn kindertijd geniet van het vereenvoudigen van processen om tijd te besparen? Geweldig!',
+            'Dus, je streeft ernaar om processen en taken te automatiseren met machines of robots, terwijl je je vaardigheden in de IT-wereld blijft uitbreiden? Hoe verrassend en origineel!',
+            'En daar ga je dan, Reinier Geppaard, met je inspiratie om processen te automatiseren, je carrièredoelen al vroeg in het leven vastgesteld en altijd op zoek naar nieuwe kennis in de IT-wereld. Wat een unieke persoonlijkheid!'
+          ]
         };
         this.profilesCache = [mockProfile];
         return of([mockProfile]);

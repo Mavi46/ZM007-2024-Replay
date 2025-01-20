@@ -31,7 +31,5 @@ export interface UserProfile {
     name: string;
     email: string;
     status: string;
-    text1: string;
-    text2: string;
-    text3: string;
+    linkedIn: string[];
 }

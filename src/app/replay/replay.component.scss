@@ -8,7 +8,6 @@
 }
 
 body {
-    // font-family: 'Roboto', sans-serif;
     font-family: monospace;
 }
 
@@ -16,7 +15,7 @@ body {
     position: relative;
     height: 100%;
     width: 100%;
-    background-color: black;
+    background-color: #1a1c2c;
     overflow: hidden;
 }
 
@@ -49,50 +48,54 @@ body {
 }
 
 .content {
-    // position: absolute;
-    // padding-left: 15%;
-    // padding-right: 15%;
-    // justify-content: center;
-    // align-items: center;
-    // color: white;
-    // z-index: 1;
-    // opacity: 0;
-    // transition: opacity 1s ease-in-out;
-
-    // height: 100%;
-    // display: flex;
-    // flex-wrap: wrap;
-    // align-items: center;
-    // justify-content: center;
-    // color: white;
-    // z-index: 1;
-    // opacity: 0;
-    // transition: opacity 1s ease-in-out;
-    // gap: 1rem;
-
     color: white;
-
 }
 
 .content.show {
     opacity: 1;
 }
 
-
-// Tweaken van de breedte als er een col-12 div is toegepast
+// Tweaking of width if col-12
 .nested-grid {
     width: 100%;
 }
 
-// Styling per scherm
-// Paars HCI
+// Controls
+.controls {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    // background-color: rgba(0, 0, 0, 0.7);
+    background-color: #333C57;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.key-image-space {
+    vertical-align: middle;
+    height: 48px;
+    margin-right: 10px;
+}
+
+.key-image-right {
+    vertical-align: middle;
+    height: 24px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+// Styling for each screen
+// Pruple HCI
 .h1-hci {
     margin-top: 20%;
     font-size: 30px;
 }
 
 .popup-hci {
-    background-color: gray;
+    background-color: #333C57;
     border-radius: 20px;
     text-align: center;
     padding: 20px;
@@ -105,14 +108,14 @@ body {
 }
 
 
-// Rood Software Engineering 
+// Red Software Engineering 
 .h1-se {
     margin-top: 20%;
     font-size: 30px;
 }
 
 .popup-se {
-    background-color: gray;
+    background-color: #333C57;
     border-radius: 20px;
     // text-align: center;
     padding: 0px 30px 0px 30px;
@@ -129,8 +132,16 @@ body {
     text-align: right;
 }
 
-// Groen Data Engineering
+// Green Data Engineering
 .h1-de {
     margin-top: 20%;
     font-size: 30px;
+}
+
+// Blue Security & Cloud
+.video-player {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
 }
