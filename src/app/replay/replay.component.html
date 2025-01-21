@@ -3,15 +3,17 @@
     <div class="curtain curtain-right" [style.background-color]="curtainColor" [class.open]="curtainOpened"></div>
     <div class="content grid" [class.show]="curtainOpened" *ngIf="userProfile">
         <div class="grid nested-grid">
-            <!-- Ruimte Links -->
+            <!-- Spacing Left -->
             <div class="col-2">
                 <div class="text-center p-3 border-round-sm h-full bg-primary font-bold"></div>
             </div>
 
-            <!-- Content Paars  -->
+
+            <!-- Content Purple  -->
             <div class="col-8" *ngIf="curtainColor === '#5D275D'">
                 <div class="grid">
                     <div class="col-12">
+                        <app-timer-bar [progress]="(timeRemaining / timerDuration) * 100"></app-timer-bar>
                         <h1 class="h1-hci text-center" [@slideInOut]="h1State">{{h1RotationText}}</h1>
                         <div class="container-hci" *ngIf="hciPopup">
                             <div class="popup-hci">
@@ -23,10 +25,11 @@
                 </div>
             </div>
 
-            <!-- Content Rood  -->
+            <!-- Content Red  -->
             <div class="col-8" *ngIf="curtainColor === '#B13E53'">
                 <div class="grid">
                     <div class="col-12">
+                        <app-timer-bar [progress]="(timeRemaining / timerDuration) * 100"></app-timer-bar>
                         <h1 class="h1-se text-center" [@slideInOut]="h1State">{{ h1RotationText }}</h1>
                     </div>
                     <div class="col-12 flex justify-content-end">
@@ -38,52 +41,72 @@
                     </div>
                     <div class="col-12">
                         <div class="popup-se scriptcontent" *ngIf="typedScriptContent">
-                            <!-- <h2> -->
                             <pre [typewriter]="typedScriptContent" [speed]="20" style="white-space: pre-wrap;"></pre>
-                            <!-- </h2> -->
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Content Groen  -->
+            <!-- Content Green  -->
             <div class="col-8" *ngIf="curtainColor === '#00BA85'">
                 <div class="grid">
                     <div class="col-12">
+                        <app-timer-bar [progress]="(timeRemaining / timerDuration) * 100"></app-timer-bar>
                         <h1 class="h1-de text-center" [@slideInOut]="h1State">{{h1RotationText}}
                         </h1>
                     </div>
                 </div>
             </div>
 
-            <!-- Content Blauw  -->
+            <!-- Content Blue  -->
             <div class="col-8" *ngIf="curtainColor === '#3B5DC9'">
                 <div class="grid">
                     <div class="col-12">
+                        <app-timer-bar [progress]="(timeRemaining / timerDuration) * 100"></app-timer-bar>
                         <h1 class="h1-hci text-center" [@slideInOut]="h1State">{{h1RotationText}}</h1>
+                        <div *ngIf="showVideo">
+                            <video autoplay class="video-player">
+                                <source src="../../assets/scVideo.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Content Geel-->
+            <!-- Content Yellow-->
             <div class="col-8" *ngIf="curtainColor === '#FFCD75'">
                 <div class="grid">
                     <div class="col-12">
+                        <app-timer-bar [progress]="(timeRemaining / timerDuration) * 100"></app-timer-bar>
+                        <h1 class="h1-de text-center" [@slideInOut]="h1State">{{h1RotationText}}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Ending  -->
+            <div class="col-8" *ngIf="curtainColor === '#29366F'">
+                <div class="grid">
+                    <div class="col-12">
+                        <app-timer-bar [progress]="(timeRemaining / timerDuration) * 100"></app-timer-bar>
                         <h1 class="h1-hci text-center" [@slideInOut]="h1State">{{h1RotationText}}</h1>
                     </div>
                 </div>
             </div>
 
-            <!-- Content Extra Scherm  -->
-            <div class="col-8" *ngIf="curtainColor === '#29366F'">
-                <div class="grid">
-                    <div class="col-12">
-                        <h1 class="h1-hci text-center" [@slideInOut]="h1State">{{h1RotationText}} ex</h1>
-                    </div>
-                </div>
+            <div class="controls">
+                <p>
+                    <img src="../../assets/space-button-icon.png" alt="Space Key" class="key-image-space" />
+                    Pauzeren/Hervatten van de timer.
+                    <!-- </p>
+                <p> -->
+                    <img src="../../assets/right-arrow-button-icon.png" alt="Right Arrow Key" class="key-image-right" />
+                    Volgende element.
+                </p>
             </div>
 
-            <!-- Ruimte rechts  -->
+            <!-- Spacing Right  -->
             <div class="col-2">
                 <div class="text-center p-3 border-round-sm h-full bg-primary font-bold">
                 </div>
