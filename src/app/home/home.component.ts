@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 import { ReplayService } from '../services/replay.service';
 import { UserProfile } from '../interfaces/replay-data';
 
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -15,6 +16,7 @@ export class HomeComponent implements OnInit {
   userProfiles: UserProfile[] = [];
   isLoading = true;
   error: string | null = null;
+  selectedProfile!: UserProfile;
 
   constructor(private replayService: ReplayService, private router: Router) { }
 
@@ -34,6 +36,8 @@ export class HomeComponent implements OnInit {
 
   startReplay(index: number) {
     this.router.navigate(['/replay'], { queryParams: { id: index } });
+
   }
+
 
 }
