@@ -342,6 +342,12 @@ requests.post(post_url, json=data)`;
           ]
         : ['... Helaas','Wij hebben geen informatie over jou kunnen vinden', 'Blijkbaar heb jij je digitale voetafdruk goed op orde']), // Alleen als je geen data hebt
       'Wees altijd bewust van wat je openbaar hebt staan en welke gegevens je deelt', // Altijd getoond
+
+      'Het ziet er naar uit dat je na het spelen van het spel de QR-code hebt gescand', //if Ja
+      'Het ziet er naar uit dat je na het spelen van het spel niet de QR-code hebt gescand', //if Nee
+      'Dat is een goede keuze, want je weet nooit wat er achter een QR-code zit', //if Nee
+      'Dit zou zomaar eens een link kunnen zijn die niet veilig is', //if Ja
+      'Wees altijd bewust van welke links je opent', //Altijd getoond
     ];
 
     this.h1RotationText = this.h1TextArray[0];
