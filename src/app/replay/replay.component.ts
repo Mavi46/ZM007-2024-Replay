@@ -40,11 +40,12 @@ export class ReplayComponent {
   h1RotationText: string = '';
   screenElementsShowed: boolean = false;
 
-  // Timer
+  // Timer & controls
   timerDuration: number = 10000; // Seconds per element
   timeRemaining: number = this.timerDuration;
   timerInterval: any = null;
   isPaused: boolean = false;
+  controlsActive: boolean = false;
 
   //User Profile
   userProfile!: UserProfile | null;
@@ -92,6 +93,11 @@ export class ReplayComponent {
 
   openCurtain(): void {
     setTimeout(() => {
+
+      setTimeout(() => {
+        this.controlsActive = true;
+      }, 1500);
+
       this.curtainOpened = true;
       this.curtainColor = this.curtainColors[this.currentColorIndex];
       if (this.curtainColor === '#5D275D') { // Purple - HCI
@@ -123,6 +129,7 @@ export class ReplayComponent {
 
     setTimeout(() => {
       this.timerInterval = setInterval(() => {
+
         if (!this.isPaused && this.timeRemaining > 0) {
           this.timeRemaining -= 100;
 
@@ -142,6 +149,24 @@ export class ReplayComponent {
 
   }
 
+  controlLock(short: boolean): void {
+    this.controlsActive = false;
+    if (short) {
+      console.log('Lock, 2 seconden.');
+      setTimeout(() => {
+        this.controlsActive = true;
+      }, 2000);
+    } else {
+      console.log('Lock, 6 seconden.');
+      setTimeout(() => {
+        this.controlsActive = true;
+      }, 6000);
+    }
+
+
+
+  }
+
   // onKeyDown(event: KeyboardEvent): void {
   //   if (event.code === 'Space' || event.key === ' ') {
   //     event.preventDefault();
@@ -150,54 +175,66 @@ export class ReplayComponent {
   // }
 
   onKeyDown(event: KeyboardEvent): void {
-    if (event.code === 'Space' || event.key === ' ') {
-      event.preventDefault();
-      this.isPaused = !this.isPaused;
-    } else if (event.code === 'ArrowRight') {
-      event.preventDefault();
-      this.nextAction();
+    if (this.controlsActive) {
+      if (event.code === 'Space' || event.key === ' ') {
+        event.preventDefault();
+        this.isPaused = !this.isPaused;
+      } else if (event.code === 'ArrowRight') {
+        event.preventDefault();
+        this.nextAction();
+      }
     }
   }
 
   nextAction(): void {
     if (this.curtainColor === '#5D275D') { // Purple - HCI
       if (!this.screenElementsShowed) {
+        this.controlLock(true);
         this.purpleNextElement();
       } else {
         this.screenElementsShowed = false;
         this.h1CurrentTextIndex = 0;
+        this.controlLock(false);
         this.closeCurtains();
       }
     } if (this.curtainColor === '#B13E53') { // Red - SE
       if (!this.screenElementsShowed) {
+        this.controlLock(true);
         this.redNextElement();
       } else {
         this.screenElementsShowed = false;
         this.h1CurrentTextIndex = 0;
+        this.controlLock(false);
         this.closeCurtains();
       }
     } if (this.curtainColor === '#00BA85') { // Green - DE
       if (!this.screenElementsShowed) {
+        this.controlLock(true);
         this.greenNextElement();
       } else {
         this.screenElementsShowed = false;
         this.h1CurrentTextIndex = 0;
+        this.controlLock(false);
         this.closeCurtains();
       }
     } if (this.curtainColor === '#3B5DC9') { // Blue - Security
       if (!this.screenElementsShowed) {
+        this.controlLock(true);
         this.blueNextElement();
       } else {
         this.screenElementsShowed = false;
         this.h1CurrentTextIndex = 0;
+        this.controlLock(false);
         this.closeCurtains();
       }
     } if (this.curtainColor === '#29366F') { // Ending
       if (!this.screenElementsShowed) {
+        this.controlLock(true);
         this.endingNextelement();
       } else {
         this.screenElementsShowed = false;
         this.h1CurrentTextIndex = 0;
+        this.controlLock(false);
         this.closeCurtains();
       }
     }
