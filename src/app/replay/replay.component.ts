@@ -64,28 +64,27 @@ export class ReplayComponent {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      const id = +params['id'];
+      const id = params['id'];
 
-      if (!isNaN(id)) {
-        // Getting data async and creating userProfile
-        this.replayService.getUserProfileByIndex(id).subscribe({
+      if (id) {
+        this.replayService.getUserProfileById(id).subscribe({
           next: (profile) => {
             if (profile) {
               this.userProfile = profile;
               window.addEventListener('keydown', this.onKeyDown.bind(this));
               this.openCurtain();
             } else {
-              // No valid profile; navigate back to home
+              console.warn('No profile found for ID:', id);
               this.router.navigate(['/']);
             }
           },
           error: (err) => {
-            console.error('Error loading userProfile: ', err);
+            console.error('Error loading user profile:', err);
             this.router.navigate(['/']);
           }
         });
       } else {
-        // When id is not a valid type
+        console.warn('No ID provided in query parameters');
         this.router.navigate(['/']);
       }
     });
@@ -167,13 +166,6 @@ export class ReplayComponent {
 
   }
 
-  // onKeyDown(event: KeyboardEvent): void {
-  //   if (event.code === 'Space' || event.key === ' ') {
-  //     event.preventDefault();
-  //     this.nextAction();
-  //   }
-  // }
-
   onKeyDown(event: KeyboardEvent): void {
     if (this.controlsActive) {
       if (event.code === 'Space' || event.key === ' ') {
@@ -240,9 +232,6 @@ export class ReplayComponent {
     }
 
     this.startTimer();
-
-
-
 
   }
 
