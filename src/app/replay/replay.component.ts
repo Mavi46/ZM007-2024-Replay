@@ -321,8 +321,8 @@ requests.post(post_url, json=data)`;
 
   provideRedText(): void {
     this.h1TextArray = [
-      'Nu zijn wij natuurlijk nieuwsgierig naar jou',
-      'Dit is wat wij nu kunnen',
+      'Software engineering is het vakgebied dat zich bezighoudt met het ontwikkelen van verschillende soorten applicaties die aansluiten op de behoeften van de gebruiker',
+      'Dit is wat wij met de ontvangen gegevens kunnen maken',
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
@@ -332,7 +332,8 @@ requests.post(post_url, json=data)`;
     const userProfileName = this.userProfile?.name;
 
     this.h1TextArray = [
-      'Eens kijken wat wij kunnen vinden over jou',
+      'Data engineering is het vakgebied dat zich bezighoudt met het verzamelen, opslaan en analyseren van data',
+      'Eens kijken wat wij kunnen vinden over jou met de gegeven persoonsgegevens',
       `Hallo ${userProfileName}`,
       ...(this.userProfile?.linkedIn?.length
         ? [
@@ -349,6 +350,7 @@ requests.post(post_url, json=data)`;
 
   provideBlueText(): void {
     this.h1TextArray = [
+      'Security & Cloud is het vakgebied dat zich bezighoudt met het beveiligen van data en applicaties in de cloud zodat gebruikers veilig met de applicaties kunnen werken',
       'Benieuwd hoe wij dit gedaan hebben?',
     ];
     this.h1RotationText = this.h1TextArray[0];

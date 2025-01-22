@@ -14,6 +14,7 @@
                 <div class="grid">
                     <div class="col-12">
                         <app-timer-bar [progress]="(timeRemaining / timerDuration) * 100"></app-timer-bar>
+                        <h1 class="titelvakgebied text-center">HCI</h1>
                         <h1 class="h1-hci text-center" [@slideInOut]="h1State">{{h1RotationText}}</h1>
                         <div class="container-hci" *ngIf="hciPopup">
                             <div class="popup-hci">
@@ -30,6 +31,7 @@
                 <div class="grid">
                     <div class="col-12">
                         <app-timer-bar [progress]="(timeRemaining / timerDuration) * 100"></app-timer-bar>
+                        <h1 class="titelvakgebied text-center">Software Engineering</h1>
                         <h1 class="h1-se text-center" [@slideInOut]="h1State">{{ h1RotationText }}</h1>
                     </div>
                     <div class="col-12 flex justify-content-end">
@@ -52,6 +54,7 @@
                 <div class="grid">
                     <div class="col-12">
                         <app-timer-bar [progress]="(timeRemaining / timerDuration) * 100"></app-timer-bar>
+                        <h1 class="titelvakgebied text-center">Data Engineering</h1>
                         <h1 class="h1-de text-center" [@slideInOut]="h1State">{{h1RotationText}}
                         </h1>
                     </div>
@@ -63,6 +66,7 @@
                 <div class="grid">
                     <div class="col-12">
                         <app-timer-bar [progress]="(timeRemaining / timerDuration) * 100"></app-timer-bar>
+                        <h1 class="titelvakgebied text-center">Security & Cloud</h1>
                         <h1 class="h1-hci text-center" [@slideInOut]="h1State">{{h1RotationText}}</h1>
                         <div *ngIf="showVideo">
                             <video autoplay class="video-player">
