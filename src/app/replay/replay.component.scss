@@ -63,32 +63,32 @@ body {
 // Controls
 .controls {
     position: fixed;
-    bottom: 10px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     // background-color: rgba(0, 0, 0, 0.7);
     background-color: #333C57;
-    padding: 10px 20px;
-    border-radius: 10px;
+    padding: 5px 20px;
+    border-radius: 20px;
     text-align: center;
 }
 
 .key-image-space {
     vertical-align: middle;
-    height: 48px;
+    height: 30px;
     margin-right: 10px;
 }
 
 .key-image-right {
     vertical-align: middle;
-    height: 24px;
+    height: 30px;
     margin-right: 10px;
     margin-left: 10px;
 }
 
 
 // Styling for each screen
-// Pruple HCI
+// Purple HCI
 .h1-hci {
     margin-top: 20%;
     font-size: 30px;
@@ -107,6 +107,13 @@ body {
     text-align: center;
 }
 
+// om de titel van het vakgebied netjes te houden
+.titelvakgebied {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: -180px;  
+} 
 
 // Red Software Engineering 
 .h1-se {
@@ -139,9 +146,23 @@ body {
 }
 
 // Blue Security & Cloud
+.h1-sc {
+    margin-top: 20%;
+    font-size: 30px;
+    //z-index: 2;
+}
+ 
 .video-player {
-    width: 100%;
-    height: auto;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 50%;
     display: block;
-    object-fit: contain;
+    box-shadow: 0px 0px 40px 40px #171b27;
+}
+
+// Ending
+.h1-end {
+    margin-top: 20%;
+    font-size: 30px;
 }
