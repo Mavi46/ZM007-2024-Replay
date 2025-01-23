@@ -32,11 +32,11 @@ export class HomeComponent implements OnInit {
         this.isLoading = false;
       }
     });
+
   }
 
-  startReplay(index: number) {
-    this.router.navigate(['/replay'], { queryParams: { id: index } });
-
+  startReplay(id: string): void {
+    this.router.navigate(['/replay'], { queryParams: { id } });
   }
 
 

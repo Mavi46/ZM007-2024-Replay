@@ -41,12 +41,12 @@ export class ReplayComponent {
   h1RotationText: string = '';
   screenElementsShowed: boolean = false;
 
-  // Timer
+  // Timer & controls
   timerDuration: number = 10000; // Seconds per element
   timeRemaining: number = this.timerDuration;
   timerInterval: any = null;
   isPaused: boolean = false;
-  controlsActive: boolean = true;
+  controlsActive: boolean = false;
 
   //User Profile
   userProfile!: UserProfile | null;
@@ -65,28 +65,27 @@ export class ReplayComponent {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      const id = +params['id'];
+      const id = params['id'];
 
-      if (!isNaN(id)) {
-        // Getting data async and creating userProfile
-        this.replayService.getUserProfileByIndex(id).subscribe({
+      if (id) {
+        this.replayService.getUserProfileById(id).subscribe({
           next: (profile) => {
             if (profile) {
               this.userProfile = profile;
               window.addEventListener('keydown', this.onKeyDown.bind(this));
               this.openCurtain();
             } else {
-              // No valid profile; navigate back to home
+              console.warn('No profile found for ID:', id);
               this.router.navigate(['/']);
             }
           },
           error: (err) => {
-            console.error('Error loading userProfile: ', err);
+            console.error('Error loading user profile:', err);
             this.router.navigate(['/']);
           }
         });
       } else {
-        // When id is not a valid type
+        console.warn('No ID provided in query parameters');
         this.router.navigate(['/']);
       }
     });
@@ -94,6 +93,11 @@ export class ReplayComponent {
 
   openCurtain(): void {
     setTimeout(() => {
+
+      setTimeout(() => {
+        this.controlsActive = true;
+      }, 1500);
+
       this.curtainOpened = true;
       this.curtainColor = this.curtainColors[this.currentColorIndex];
       if (this.curtainColor === '#5D275D') { // Purple - HCI
@@ -128,6 +132,7 @@ export class ReplayComponent {
 
     setTimeout(() => {
       this.timerInterval = setInterval(() => {
+
         if (!this.isPaused && this.timeRemaining > 0) {
           this.timeRemaining -= 100;
 
@@ -147,54 +152,75 @@ export class ReplayComponent {
 
   }
 
-  // onKeyDown(event: KeyboardEvent): void {
-  //   if (event.code === 'Space' || event.key === ' ') {
-  //     event.preventDefault();
-  //     this.nextAction();
-  //   }
-  // }
+  controlLock(short: boolean): void {
+    this.controlsActive = false;
+    if (short) {
+      console.log('Lock, 2 seconden.');
+      setTimeout(() => {
+        this.controlsActive = true;
+      }, 2000);
+    } else {
+      console.log('Lock, 6 seconden.');
+      setTimeout(() => {
+        this.controlsActive = true;
+      }, 6000);
+    }
+
+
+
+  }
 
   onKeyDown(event: KeyboardEvent): void {
-    if (event.code === 'Space' || event.key === ' ') {
-      event.preventDefault();
-      this.isPaused = !this.isPaused;
-    } else if (event.code === 'ArrowRight') {
-      event.preventDefault();
-      this.nextAction();
+    if (this.controlsActive) {
+      if (event.code === 'Space' || event.key === ' ') {
+        event.preventDefault();
+        this.isPaused = !this.isPaused;
+      } else if (event.code === 'ArrowRight') {
+        event.preventDefault();
+        this.nextAction();
+      }
     }
   }
 
   nextAction(): void {
     if (this.curtainColor === '#5D275D') { // Purple - HCI
       if (!this.screenElementsShowed) {
+        this.controlLock(true);
         this.purpleNextElement();
       } else {
         this.screenElementsShowed = false;
         this.h1CurrentTextIndex = 0;
+        this.controlLock(false);
         this.closeCurtains();
       }
     } if (this.curtainColor === '#B13E53') { // Red - SE
       if (!this.screenElementsShowed) {
+        this.controlLock(true);
         this.redNextElement();
       } else {
         this.screenElementsShowed = false;
         this.h1CurrentTextIndex = 0;
+        this.controlLock(false);
         this.closeCurtains();
       }
     } if (this.curtainColor === '#00BA85') { // Green - DE
       if (!this.screenElementsShowed) {
+        this.controlLock(true);
         this.greenNextElement();
       } else {
         this.screenElementsShowed = false;
         this.h1CurrentTextIndex = 0;
+        this.controlLock(false);
         this.closeCurtains();
       }
     } if (this.curtainColor === '#3B5DC9') { // Blue - Security
       if (!this.screenElementsShowed) {
+        this.controlLock(true);
         this.blueNextElement();
       } else {
         this.screenElementsShowed = false;
         this.h1CurrentTextIndex = 0;
+        this.controlLock(false);
         this.closeCurtains();
       }
     } if (this.curtainColor === '#FFCD75') { // Yellow - Ending
@@ -207,18 +233,17 @@ export class ReplayComponent {
       }  
     } if (this.curtainColor === '#29366F') { // Ending
       if (!this.screenElementsShowed) {
+        this.controlLock(true);
         this.endingNextelement();
       } else {
         this.screenElementsShowed = false;
         this.h1CurrentTextIndex = 0;
+        this.controlLock(false);
         this.closeCurtains();
       }
     }
 
     this.startTimer();
-
-
-
 
   }
 
