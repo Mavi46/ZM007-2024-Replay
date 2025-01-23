@@ -64,7 +64,7 @@
                     <div class="col-12">
                         <app-timer-bar [progress]="(timeRemaining / timerDuration) * 100"></app-timer-bar>
                         <h1 class="h1-hci text-center" [@slideInOut]="h1State">{{h1RotationText}}</h1>
-                        <div *ngIf="showVideo">
+                        <div class="col-11" *ngIf="showVideo">
                             <video autoplay class="video-player">
                                 <source src="../../assets/scVideo.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
