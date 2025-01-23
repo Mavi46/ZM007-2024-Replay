@@ -74,6 +74,17 @@
                 </div>
             </div>
 
+            <!-- Content Yellow-->
+            <div class="col-8" *ngIf="curtainColor === '#FFCD75'">
+                <div class="grid">
+                    <div class="col-12">
+                        <app-timer-bar [progress]="(timeRemaining / timerDuration) * 100"></app-timer-bar>
+                        <h1 class="h1-end text-center" [@slideInOut]="h1State">{{h1RotationText}}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+
             <!-- Content Ending  -->
             <div class="col-8" *ngIf="curtainColor === '#29366F'">
                 <div class="grid">

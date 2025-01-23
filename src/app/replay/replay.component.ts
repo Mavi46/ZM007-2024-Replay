@@ -26,8 +26,9 @@ import { TimerBarComponent } from '../timer-bar/timer-bar.component';
   ]
 })
 export class ReplayComponent {
-  // curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#29366F']; // Purple HCI, Red SE, Green DataE, Blue Security, Ending
-  curtainColors = ['#3B5DC9'];
+  curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75', '#29366F']; // Purple HCI, Red SE, Green DataE, Blue Security, Ending Yellow, (Ending)
+  // curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75','#29366F']; // Purple HCI, Red SE, Green DataE, Blue Security, Ending Yellow, (Ending)
+  // curtainColors = ['#3B5DC9'];
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
   nextCurtainColor = this.curtainColors[this.currentColorIndex];
@@ -45,6 +46,7 @@ export class ReplayComponent {
   timeRemaining: number = this.timerDuration;
   timerInterval: any = null;
   isPaused: boolean = false;
+  controlsActive: boolean = true;
 
   //User Profile
   userProfile!: UserProfile | null;
@@ -105,6 +107,9 @@ export class ReplayComponent {
         this.startTimer();
       } if (this.curtainColor === '#3B5DC9') { // Blue - Security
         this.provideBlueText();
+        this.startTimer();
+      } if (this.curtainColor === '#FFCD75') { // Yellow - Ending
+        this.provideYellowText();
         this.startTimer();
       } if (this.curtainColor === '#29366F') { // Ending
         this.provideEndingText();
@@ -192,6 +197,14 @@ export class ReplayComponent {
         this.h1CurrentTextIndex = 0;
         this.closeCurtains();
       }
+    } if (this.curtainColor === '#FFCD75') { // Yellow - Ending
+      if (!this.screenElementsShowed) {
+        this.yellowNextElement();
+      } else {
+        this.screenElementsShowed = false;
+        this.h1CurrentTextIndex = 0;
+        this.closeCurtains();
+      }  
     } if (this.curtainColor === '#29366F') { // Ending
       if (!this.screenElementsShowed) {
         this.endingNextelement();
@@ -289,6 +302,38 @@ start()`;
     }
   }
 
+  yellowNextElement(): void {
+    this.isPaused = false;
+    if (this.h1CurrentTextIndex < this.h1TextArray.length - 1) {
+      this.h1State = 'out';
+      setTimeout(() => {
+        this.h1CurrentTextIndex++;
+        this.h1RotationText = this.h1TextArray[this.h1CurrentTextIndex];
+        this.h1State = 'in';
+  
+        if (this.h1CurrentTextIndex === this.h1TextArray.length - 1) {
+          this.screenElementsShowed = true;
+        }
+      }, 500);
+    }
+  }
+  
+
+  NextElement(): void {
+    if (this.h1CurrentTextIndex < this.h1TextArray.length - 1) {
+      this.h1State = 'out';
+      setTimeout(() => {
+        this.h1CurrentTextIndex++;
+        this.h1RotationText = this.h1TextArray[this.h1CurrentTextIndex];
+        this.h1State = 'in';
+      }, 500);
+    } else {
+      this.isPaused = true; // Timer will be paused to play the full video
+      this.showVideo = true;
+      this.screenElementsShowed = true;
+    }
+  }
+
   endingNextelement(): void {
     this.isPaused = false; // Timer will proceed as the timer is paused on the previous screen.
     if (this.h1CurrentTextIndex < this.h1TextArray.length - 1) {
@@ -356,6 +401,17 @@ start()`;
   provideBlueText(): void {
     this.h1TextArray = [
       'Benieuwd hoe wij dit gedaan hebben?',
+    ];
+    this.h1RotationText = this.h1TextArray[0];
+    this.h1State = 'in';
+  }
+
+  provideYellowText(): void {
+    this.h1TextArray = [
+      'Dit was het einde van onze ICT-ervaring. Bedankt voor je deelname!',
+      'We houden je op de hoogte als je een prijs gewonnen hebt. Houd je e-mail in de gaten voor meer informatie.',
+      'Als je meer over dit project wil weten, stel gerust vragen of bekijk de extra informatie.',
+      'Geen zorgen, je gegevens worden tijdelijk opgeslagen en meteen verwijderd na het bekijken van de replay.',
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
