@@ -396,7 +396,7 @@ requests.post(post_url, json=data)`;
       'Dit was het einde van onze ICT-ervaring. Bedankt voor je deelname!',
       'We houden je op de hoogte als je een prijs gewonnen hebt. Houd je e-mail in de gaten voor meer informatie.',
       'Als je meer over dit project wil weten, stel gerust vragen of bekijk de extra informatie.',
-      'Geen zorgen, je gegevens worden niet opgeslagen en blijven volledig privé.',
+      'Geen zorgen, je gegevens worden tijdelijk opgeslagen en meteen verwijderd na het bekijken van de replay.',
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
