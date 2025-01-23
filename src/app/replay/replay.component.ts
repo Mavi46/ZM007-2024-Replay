@@ -300,7 +300,6 @@ requests.post(post_url, json=data)`;
         this.h1RotationText = this.h1TextArray[this.h1CurrentTextIndex];
         this.h1State = 'in';
   
-        // Controleer of dit het laatste element is
         if (this.h1CurrentTextIndex === this.h1TextArray.length - 1) {
           this.screenElementsShowed = true;
         }
