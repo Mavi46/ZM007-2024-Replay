@@ -63,25 +63,25 @@ body {
 // Controls
 .controls {
     position: fixed;
-    bottom: 10px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     // background-color: rgba(0, 0, 0, 0.7);
     background-color: #333C57;
-    padding: 10px 20px;
-    border-radius: 10px;
+    padding: 5px 20px;
+    border-radius: 20px;
     text-align: center;
 }
 
 .key-image-space {
     vertical-align: middle;
-    height: 48px;
+    height: 30px;
     margin-right: 10px;
 }
 
 .key-image-right {
     vertical-align: middle;
-    height: 24px;
+    height: 30px;
     margin-right: 10px;
     margin-left: 10px;
 }
@@ -144,4 +144,10 @@ body {
     height: auto;
     display: block;
     object-fit: contain;
+    border-style: solid;
+    border-width: 50px;
+    border-color: #171b27;
+    box-shadow: 0px 0px 100px 100px #171b27;
+    //border-image: radial-gradient(from center, red 0%, green 100%) 1;
+    //border: 5px solid red;
 }

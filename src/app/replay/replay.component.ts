@@ -26,13 +26,8 @@ import { TimerBarComponent } from '../timer-bar/timer-bar.component';
   ]
 })
 export class ReplayComponent {
-<<<<<<< HEAD
-  curtainColors = ['#8B548F', '#BB4848', '#00BA85', '#1F1A65']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
-  //curtainColors = ['#BB4848']; // Paars HCI, Rood SE, Groen DataE, Blauw Security
-=======
-  curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#29366F']; // Purple HCI, Red SE, Green DataE, Blue Security, Ending
-  // curtainColors = ['#00BA85'];
->>>>>>> main
+  // curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#29366F']; // Purple HCI, Red SE, Green DataE, Blue Security, Ending
+  curtainColors = ['#3B5DC9'];
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
   nextCurtainColor = this.curtainColors[this.currentColorIndex];
@@ -241,37 +236,28 @@ export class ReplayComponent {
       setTimeout(() => {
         this.typedScriptContent = `
 def start():
-        while True:
-            taak = checkDatabase()  # Zoek nieuwe taak
-            if taak:
-                link = zoekData(taak)  # Zoek Data
-                downloadPagina(link)  # Download pagina
-                data = verwerkPagina()  # Haal info uit pagina
-                verhaal = maakVerhaal(data) # Maak verhaal van data
-                slaOpInDatabase(data, taak)  # Sla op in database
-                maakSchoon()  # Verwijder tijdelijke bestanden
+    while True:
+        taak = checkDatabase()  # Zoek nieuwe taak
+        if taak:
+            link = zoekData(taak)  # Zoek Data
+            downloadPagina(link)  # Download pagina
+            data = verwerkPagina()  # Haal info uit pagina
+            verhaal = maakVerhaal(data) # Maak verhaal van data
+            slaOpInDatabase(data, taak)  # Sla op in database
+            maakSchoon()  # Verwijder tijdelijke bestanden
 
 def maakVerhaal(gevonden_data):
-        prompt = "Geef 3 korte feitjes op basis van: " + gevonden_data
-        response = vraagAI(prompt) # AI maakt verhaalvorm
-        return response["inhoud"]
+    prompt = "Geef 3 korte feitjes op basis van: " + gevonden_data
+    response = vraagAI(prompt) # AI maakt verhaalvorm
+    return response["inhoud"]
 
-start():`;
-            
+start()`;
       }, this.typedScriptName.length * 50);
       this.screenElementsShowed = true;
     }
 
   }
 
-<<<<<<< HEAD
-
-  handleGreenTextChange(): void {
-    const userProfileName = this.userProfile?.name;
-    const text1 = this.userProfile?.text1;
-    const text2 = this.userProfile?.text2;
-    const text3 = this.userProfile?.text3;
-=======
   greenNextElement(): void {
     if (this.h1CurrentTextIndex < this.h1TextArray.length - 1) {
       this.h1State = 'out';
@@ -279,7 +265,6 @@ start():`;
         this.h1CurrentTextIndex++;
         this.h1RotationText = this.h1TextArray[this.h1CurrentTextIndex];
         this.h1State = 'in';
->>>>>>> main
 
         // Check if it is the last element to set the flag
         if (this.h1CurrentTextIndex === this.h1TextArray.length - 1) {
@@ -331,10 +316,10 @@ start():`;
 
   providePurpleText(): void {
     this.h1TextArray = [
-      'Mens-computerinteractie (MCI) is een vakgebied binnen de informatiekunde dat zich bezighoudt met onderzoek naar de interactie (wisselwerking) tussen mensen (gebruikers) en machines (waaronder computers)',
-      'Onze applicatie is ontworpen waarbij specifieke keuzes gemaakt zijn aan de hand van design principes',
-      'Met een leaderboard en spellen trekken we de aandacht van bezoekers',
-      'Hiermee hebben we nu de volgende gegevens over jou'
+      'Human-computer interaction (HCI) is een vakgebied binnen de informatiekunde dat zich bezighoudt met onderzoek naar de interactie (wisselwerking) tussen mensen (gebruikers) en machines (waaronder computers)',
+      'Onze applicatie is ontworpen op basis van specifieke keuzes die zijn gemaakt aan de hand van designprincipes',
+      'Met een leaderboard en spellen trekken wij de aandacht van bezoekers',
+      'Hiermee hebben wij nu de volgende gegevens over jou:'
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
@@ -342,8 +327,8 @@ start():`;
 
   provideRedText(): void {
     this.h1TextArray = [
-      'Nu zijn we nieuwsgierig naar jou natuurlijk',
-      'Dit is wat we nu kunnen',
+      'Nu zijn wij natuurlijk nieuwsgierig naar jou',
+      'Dit is wat wij nu kunnen',
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
@@ -353,11 +338,15 @@ start():`;
     const userProfileName = this.userProfile?.name;
 
     this.h1TextArray = [
-      'Eens kijken wat we kunnen vinden over jou',
+      'Eens kijken wat wij kunnen vinden over jou',
       `Hallo ${userProfileName}`,
-      ...(this.userProfile?.linkedIn || []),
-      'Dit was erg makkelijk te vinden',
-      'Wees altijd bewust van wat je openbaar hebt staan en wat voor gegevens je deelt',
+      ...(this.userProfile?.linkedIn?.length
+        ? [
+          ...this.userProfile.linkedIn,
+          'Dit was erg makkelijk te vinden', //Alleen als je data hebt
+          ]
+        : ['... Helaas','Wij hebben geen informatie over jou kunnen vinden', 'Blijkbaar heb jij je digitale voetafdruk goed op orde']), // Alleen als je geen data hebt
+      'Wees altijd bewust van wat je openbaar hebt staan en welke gegevens je deelt', // Altijd getoond
     ];
 
     this.h1RotationText = this.h1TextArray[0];
@@ -366,7 +355,7 @@ start():`;
 
   provideBlueText(): void {
     this.h1TextArray = [
-      'Benieuwd hoe we dit gedaan hebben?',
+      'Benieuwd hoe wij dit gedaan hebben?',
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
@@ -383,8 +372,6 @@ start():`;
 
 
 
-<<<<<<< HEAD
-=======
 
 
   fadeToNextColor(): void {
@@ -403,7 +390,6 @@ start():`;
     }, 1000);
   }
 
->>>>>>> main
   ngOnDestroy(): void {
     window.removeEventListener('keydown', this.onKeyDown.bind(this));
     if (this.timerInterval) {

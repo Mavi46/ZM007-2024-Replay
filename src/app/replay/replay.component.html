@@ -29,19 +29,19 @@
             <div class="col-8" *ngIf="curtainColor === '#B13E53'">
                 <div class="grid">
                     <div class="col-12">
-                        <app-timer-bar [progress]="(timeRemaining / timerDuration) * 100"></app-timer-bar>
+                        <app-timer-bar [progress]="(timeRemaining / timerDuration) * 110"></app-timer-bar>
                         <h1 class="h1-se text-center" [@slideInOut]="h1State">{{ h1RotationText }}</h1>
                     </div>
                     <div class="col-12 flex justify-content-end">
                         <div class="popup-se" *ngIf="typedScriptName">
                             <!-- <h2> -->
-                            <pre [typewriter]="typedScriptName" [speed]="50" style="white-space: pre-wrap;"></pre>
+                            <pre [typewriter]="typedScriptName" [speed]="40" style="white-space: pre-wrap;"></pre>
                             <!-- </h2> -->
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="popup-se scriptcontent" *ngIf="typedScriptContent">
-                            <pre [typewriter]="typedScriptContent" [speed]="20" style="white-space: pre-wrap;"></pre>
+                            <pre [typewriter]="typedScriptContent" [speed]="10" style="white-space: pre-wrap;"></pre>
                         </div>
                     </div>
                 </div>
