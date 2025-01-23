@@ -40,11 +40,12 @@ export class ReplayComponent {
   h1RotationText: string = '';
   screenElementsShowed: boolean = false;
 
-  // Timer
+  // Timer & controls
   timerDuration: number = 10000; // Seconds per element
   timeRemaining: number = this.timerDuration;
   timerInterval: any = null;
   isPaused: boolean = false;
+  controlsActive: boolean = false;
 
   //User Profile
   userProfile!: UserProfile | null;
@@ -123,6 +124,7 @@ export class ReplayComponent {
 
     setTimeout(() => {
       this.timerInterval = setInterval(() => {
+
         if (!this.isPaused && this.timeRemaining > 0) {
           this.timeRemaining -= 100;
 
@@ -142,20 +144,15 @@ export class ReplayComponent {
 
   }
 
-  // onKeyDown(event: KeyboardEvent): void {
-  //   if (event.code === 'Space' || event.key === ' ') {
-  //     event.preventDefault();
-  //     this.nextAction();
-  //   }
-  // }
-
   onKeyDown(event: KeyboardEvent): void {
-    if (event.code === 'Space' || event.key === ' ') {
-      event.preventDefault();
-      this.isPaused = !this.isPaused;
-    } else if (event.code === 'ArrowRight') {
-      event.preventDefault();
-      this.nextAction();
+    if (this.controlsActive) {
+      if (event.code === 'Space' || event.key === ' ') {
+        event.preventDefault();
+        this.isPaused = !this.isPaused;
+      } else if (event.code === 'ArrowRight') {
+        event.preventDefault();
+        this.nextAction();
+      }
     }
   }
 
