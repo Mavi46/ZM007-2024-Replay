@@ -1,4 +1,4 @@
-import { Component, ɵDeferBlockConfig } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { TypewriterDirective } from '../directives/typewriter.directive';
@@ -49,8 +49,6 @@ export class ReplayComponent {
 
   //User Profile
   userProfile!: UserProfile | null;
-  qrScanned: boolean = false;
-  mailClicked: boolean = false;
 
 
   // Screen HCI
@@ -232,7 +230,7 @@ export class ReplayComponent {
         this.screenElementsShowed = false;
         this.h1CurrentTextIndex = 0;
         this.closeCurtains();
-      }  
+      }
     } if (this.curtainColor === '#29366F') { // Ending
       if (!this.screenElementsShowed) {
         this.controlLock(true);
@@ -337,14 +335,14 @@ start()`;
         this.h1CurrentTextIndex++;
         this.h1RotationText = this.h1TextArray[this.h1CurrentTextIndex];
         this.h1State = 'in';
-  
+
         if (this.h1CurrentTextIndex === this.h1TextArray.length - 1) {
           this.screenElementsShowed = true;
         }
       }, 500);
     }
   }
-  
+
 
   NextElement(): void {
     if (this.h1CurrentTextIndex < this.h1TextArray.length - 1) {
@@ -419,8 +417,8 @@ start()`;
         ? [
           ...this.userProfile.linkedIn,
           'Dit was erg makkelijk te vinden', //Alleen als je data hebt
-          ]
-        : ['... Helaas','Wij hebben geen informatie over jou kunnen vinden', 'Blijkbaar heb jij je digitale voetafdruk goed op orde']), // Alleen als je geen data hebt
+        ]
+        : ['... Helaas', 'Wij hebben geen informatie over jou kunnen vinden', 'Blijkbaar heb jij je digitale voetafdruk goed op orde']), // Alleen als je geen data hebt
       'Wees altijd bewust van wat je openbaar hebt staan en welke gegevens je deelt', // Altijd getoond
       'Het ziet er naar uit dat je na het spelen van het spel de QR-code hebt gescand', //if Ja
       'Het ziet er naar uit dat je na het spelen van het spel niet de QR-code hebt gescand', //if Nee
