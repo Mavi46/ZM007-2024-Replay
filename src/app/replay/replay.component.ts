@@ -26,8 +26,9 @@ import { TimerBarComponent } from '../timer-bar/timer-bar.component';
   ]
 })
 export class ReplayComponent {
-  curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#29366F']; // Purple HCI, Red SE, Green DataE, Blue Security, Ending
-  // curtainColors = ['#00BA85'];
+  curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75', '#29366F']; // Purple HCI, Red SE, Green DataE, Blue Security, Ending Yellow, (Ending)
+  // curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75','#29366F']; // Purple HCI, Red SE, Green DataE, Blue Security, Ending Yellow, (Ending)
+  // curtainColors = ['#3B5DC9'];
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
   nextCurtainColor = this.curtainColors[this.currentColorIndex];
@@ -113,6 +114,9 @@ export class ReplayComponent {
         this.startTimer();
       } if (this.curtainColor === '#3B5DC9') { // Blue - Security
         this.provideBlueText();
+        this.startTimer();
+      } if (this.curtainColor === '#FFCD75') { // Yellow - Ending
+        this.provideYellowText();
         this.startTimer();
       } if (this.curtainColor === '#29366F') { // Ending
         this.provideEndingText();
@@ -222,6 +226,14 @@ export class ReplayComponent {
         this.controlLock(false);
         this.closeCurtains();
       }
+    } if (this.curtainColor === '#FFCD75') { // Yellow - Ending
+      if (!this.screenElementsShowed) {
+        this.yellowNextElement();
+      } else {
+        this.screenElementsShowed = false;
+        this.h1CurrentTextIndex = 0;
+        this.closeCurtains();
+      }  
     } if (this.curtainColor === '#29366F') { // Ending
       if (!this.screenElementsShowed) {
         this.controlLock(true);
@@ -264,17 +276,23 @@ export class ReplayComponent {
       this.typedScriptName = 'run webscraping.py';
       setTimeout(() => {
         this.typedScriptContent = `
-import requests
-from bs4 import BeautifulSoup
+def start():
+    while True:
+        taak = checkDatabase()  # Zoek nieuwe taak
+        if taak:
+            link = zoekData(taak)  # Zoek Data
+            downloadPagina(link)  # Download pagina
+            data = verwerkPagina()  # Haal info uit pagina
+            verhaal = maakVerhaal(data) # Maak verhaal van data
+            slaOpInDatabase(data, taak)  # Sla op in database
+            maakSchoon()  # Verwijder tijdelijke bestanden
 
-url = "https://example.com/profile/janedoe123"
-pagina = requests.get(url)
-soup = BeautifulSoup(pagina.text, "html.parser")
+def maakVerhaal(gevonden_data):
+    prompt = "Geef 3 korte feitjes op basis van: " + gevonden_data
+    response = vraagAI(prompt) # AI maakt verhaalvorm
+    return response["inhoud"]
 
-naam = soup.find("span", class_="name").text
-email = soup.find("a", class_="email").text
-
-requests.post(post_url, json=data)`;
+start()`;
       }, this.typedScriptName.length * 50);
       this.screenElementsShowed = true;
     }
@@ -298,6 +316,38 @@ requests.post(post_url, json=data)`;
   }
 
   blueNextElement(): void {
+    if (this.h1CurrentTextIndex < this.h1TextArray.length - 1) {
+      this.h1State = 'out';
+      setTimeout(() => {
+        this.h1CurrentTextIndex++;
+        this.h1RotationText = this.h1TextArray[this.h1CurrentTextIndex];
+        this.h1State = 'in';
+      }, 500);
+    } else {
+      this.isPaused = true; // Timer will be paused to play the full video
+      this.showVideo = true;
+      this.screenElementsShowed = true;
+    }
+  }
+
+  yellowNextElement(): void {
+    this.isPaused = false;
+    if (this.h1CurrentTextIndex < this.h1TextArray.length - 1) {
+      this.h1State = 'out';
+      setTimeout(() => {
+        this.h1CurrentTextIndex++;
+        this.h1RotationText = this.h1TextArray[this.h1CurrentTextIndex];
+        this.h1State = 'in';
+  
+        if (this.h1CurrentTextIndex === this.h1TextArray.length - 1) {
+          this.screenElementsShowed = true;
+        }
+      }, 500);
+    }
+  }
+  
+
+  NextElement(): void {
     if (this.h1CurrentTextIndex < this.h1TextArray.length - 1) {
       this.h1State = 'out';
       setTimeout(() => {
@@ -339,10 +389,10 @@ requests.post(post_url, json=data)`;
 
   providePurpleText(): void {
     this.h1TextArray = [
-      'Mens-computerinteractie (MCI) is een vakgebied binnen de informatiekunde dat zich bezighoudt met onderzoek naar de interactie (wisselwerking) tussen mensen (gebruikers) en machines (waaronder computers)',
-      'Onze applicatie is ontworpen waarbij specifieke keuzes gemaakt zijn aan de hand van design principes',
-      'Met een leaderboard en spellen trekken we de aandacht van bezoekers',
-      'Hiermee hebben we nu de volgende gegevens over jou'
+      'Human-computer interaction (HCI) is een vakgebied binnen de informatiekunde dat zich bezighoudt met onderzoek naar de interactie (wisselwerking) tussen mensen (gebruikers) en machines (waaronder computers)',
+      'Onze applicatie is ontworpen op basis van specifieke keuzes die zijn gemaakt aan de hand van designprincipes',
+      'Met een leaderboard en spellen trekken wij de aandacht van bezoekers',
+      'Hiermee hebben wij nu de volgende gegevens over jou:'
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
@@ -350,8 +400,10 @@ requests.post(post_url, json=data)`;
 
   provideRedText(): void {
     this.h1TextArray = [
-      'Nu zijn we nieuwsgierig naar jou natuurlijk',
-      'Dit is wat we nu kunnen',
+      'Software engineering is het vakgebied dat zich bezighoudt met het ontwikkelen van verschillende soorten applicaties die aansluiten op de behoeften van de gebruiker',
+      'Dit is wat wij met de ontvangen gegevens kunnen maken',
+      'Nu zijn wij natuurlijk nieuwsgierig naar jou',
+      'Dit is wat wij nu kunnen',
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
@@ -361,11 +413,21 @@ requests.post(post_url, json=data)`;
     const userProfileName = this.userProfile?.name;
 
     this.h1TextArray = [
-      'Eens kijken wat we kunnen vinden over jou',
+      'Data engineering is het vakgebied dat zich bezighoudt met het verzamelen, opslaan en analyseren van data',
+      'Eens kijken wat wij kunnen vinden over jou',
       `Hallo ${userProfileName}`,
-      ...(this.userProfile?.linkedIn || []),
-      'Dit was erg makkelijk te vinden',
-      'Wees altijd bewust van wat je openbaar hebt staan en wat voor gegevens je deelt',
+      ...(this.userProfile?.linkedIn?.length
+        ? [
+          ...this.userProfile.linkedIn,
+          'Dit was erg makkelijk te vinden', //Alleen als je data hebt
+          ]
+        : ['... Helaas','Wij hebben geen informatie over jou kunnen vinden', 'Blijkbaar heb jij je digitale voetafdruk goed op orde']), // Alleen als je geen data hebt
+      'Wees altijd bewust van wat je openbaar hebt staan en welke gegevens je deelt', // Altijd getoond
+      'Het ziet er naar uit dat je na het spelen van het spel de QR-code hebt gescand', //if Ja
+      'Het ziet er naar uit dat je na het spelen van het spel niet de QR-code hebt gescand', //if Nee
+      'Dat is een goede keuze, want je weet nooit wat er achter een QR-code zit', //if Nee
+      'Dit zou zomaar eens een link kunnen zijn die niet veilig is', //if Ja
+      'Wees altijd bewust van welke links je opent', //Altijd getoond
     ];
 
     this.h1RotationText = this.h1TextArray[0];
@@ -374,7 +436,19 @@ requests.post(post_url, json=data)`;
 
   provideBlueText(): void {
     this.h1TextArray = [
-      'Benieuwd hoe we dit gedaan hebben?',
+      'Security & Cloud is het vakgebied dat zich bezighoudt met het beveiligen van data en applicaties in de cloud zodat gebruikers veilig met de applicaties kunnen werken',
+      'Benieuwd hoe wij dit gedaan hebben?',
+    ];
+    this.h1RotationText = this.h1TextArray[0];
+    this.h1State = 'in';
+  }
+
+  provideYellowText(): void {
+    this.h1TextArray = [
+      'Dit was het einde van onze ICT-ervaring. Bedankt voor je deelname!',
+      'We houden je op de hoogte als je een prijs gewonnen hebt. Houd je e-mail in de gaten voor meer informatie.',
+      'Als je meer over dit project wil weten, stel gerust vragen of bekijk de extra informatie.',
+      'Geen zorgen, je gegevens worden tijdelijk opgeslagen en meteen verwijderd na het bekijken van de replay.',
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
