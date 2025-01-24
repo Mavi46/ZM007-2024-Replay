@@ -1,4 +1,4 @@
-<div class="grid">
+<div class="grid" *ngIf="!showOverlay">
     <div class="col-2">
     </div>
     <div class="col-8">
@@ -7,14 +7,23 @@
 
         <div *ngIf="!isLoading && userProfiles.length">
             <div class="profile-card" *ngFor="let profile of userProfiles;">
-                <h2>{{ profile.name }} <i (click)="startReplay(profile.id)" class="pi pi-play"
+                <h2>{{ profile.name }} <i (click)="openOverlay(profile)" class="pi pi-play"
                         style="font-size: 1rem; cursor: pointer;"></i></h2>
-                <p>Email: {{ profile.email }}</p>
+                <p>#{{profile.id}}</p>
                 <p>Status: {{ profile.status }}</p>
             </div>
         </div>
     </div>
     <div class="col-2">
         <i class="pi pi-sync" style="font-size: 2rem; cursor: pointer;"></i>
+    </div>
+</div>
+
+<div class="overlay" *ngIf="showOverlay">
+    <div class="overlay-content">
+        <h1>{{ selectedProfile?.id }}</h1>
+        <p>Beste bezoeker, welkom bij de replay. Bla bla bla, controls, bla bla bla.</p>
+        <button (click)="startReplay(selectedProfile?.id)">Start Replay</button>
+        <button (click)="closeOverlay()">Annuleren</button>
     </div>
 </div>

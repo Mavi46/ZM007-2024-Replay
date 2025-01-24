@@ -1,3 +1,13 @@
+:host {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif !important;
+}
+
 .grid {
     margin-top: 10px;
 }
@@ -9,11 +19,57 @@
     border-radius: 8px;
     background-color: #f9f9f9;
 }
-
+    
 .profile-card h2 {
     margin-bottom: 8px;
 }
 
 .profile-card p {
     margin: 4px 0;
+}
+
+
+// Overlay
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9); // Donkerdere achtergrond
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; // Zorg dat de overlay bovenaan staat
+}
+
+.overlay-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%; // Zorg dat de inhoud niet te breed is
+    max-width: 500px; // Limiteer de maximale breedte
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:first-child {
+    background-color: #3b5dc9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:last-child {
+    background-color: #ddd;
+    color: #333;
+    border: none;
+    border-radius: 5px;
 }

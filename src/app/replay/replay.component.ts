@@ -26,8 +26,8 @@ import { TimerBarComponent } from '../timer-bar/timer-bar.component';
   ]
 })
 export class ReplayComponent {
-  curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75', '#29366F']; // Purple HCI, Red SE, Green DataE, Blue Security, Ending Yellow, (Ending)
-  // curtainColors = ['#3B5DC9'];
+  // curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75', '#29366F']; // Purple HCI, Red SE, Green DataE, Blue Security, Ending Yellow, (Ending)
+  curtainColors = ['#3B5DC9'];
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
   nextCurtainColor = this.curtainColors[this.currentColorIndex];
@@ -49,6 +49,9 @@ export class ReplayComponent {
 
   //User Profile
   userProfile!: UserProfile | null;
+  qrScanned: boolean = true;
+  mailClicked: boolean = true;
+
 
   // Screen HCI
   hciPopup: boolean = false;
@@ -229,7 +232,7 @@ export class ReplayComponent {
         this.screenElementsShowed = false;
         this.h1CurrentTextIndex = 0;
         this.closeCurtains();
-      }  
+      }
     } if (this.curtainColor === '#29366F') { // Ending
       if (!this.screenElementsShowed) {
         this.controlLock(true);
@@ -334,14 +337,14 @@ start()`;
         this.h1CurrentTextIndex++;
         this.h1RotationText = this.h1TextArray[this.h1CurrentTextIndex];
         this.h1State = 'in';
-  
+
         if (this.h1CurrentTextIndex === this.h1TextArray.length - 1) {
           this.screenElementsShowed = true;
         }
       }, 500);
     }
   }
-  
+
 
   NextElement(): void {
     if (this.h1CurrentTextIndex < this.h1TextArray.length - 1) {
@@ -416,14 +419,33 @@ start()`;
         ? [
           ...this.userProfile.linkedIn,
           'Dit was erg makkelijk te vinden', //Alleen als je data hebt
-          ]
-        : ['... Helaas','Wij hebben geen informatie over jou kunnen vinden', 'Blijkbaar heb jij je digitale voetafdruk goed op orde']), // Alleen als je geen data hebt
+        ]
+        : ['... Helaas', 'Wij hebben geen informatie over jou kunnen vinden', 'Blijkbaar heb jij je digitale voetafdruk goed op orde']), // Alleen als je geen data hebt
       'Wees altijd bewust van wat je openbaar hebt staan en welke gegevens je deelt', // Altijd getoond
-      'Het ziet er naar uit dat je na het spelen van het spel de QR-code hebt gescand', //if Ja
-      'Het ziet er naar uit dat je na het spelen van het spel niet de QR-code hebt gescand', //if Nee
-      'Dat is een goede keuze, want je weet nooit wat er achter een QR-code zit', //if Nee
-      'Dit zou zomaar eens een link kunnen zijn die niet veilig is', //if Ja
-      'Wees altijd bewust van welke links je opent', //Altijd getoond
+
+      ...(this.qrScanned
+        ? [
+          'Het ziet er naar uit dat je na het spelen van het spel de QR-code hebt gescand', // Als qrScanned true is
+          
+          ]
+        : [
+          'Het ziet er naar uit dat je na het spelen van het spel niet de QR-code hebt gescand', // Als qrScanned false is
+          'Dat is een goede keuze, want je weet niet wat er achter een QR-code zit'
+          ]),
+          'Dit zou zomaar eens een link kunnen zijn die niet veilig is', // Altijd getoond
+          'Wees je altijd bewust van welke links je opent',
+
+      ...(this.mailClicked
+        ? [
+          'Het ziet er naar uit dat je na het spelen van het spel de link in de e-mail hebt aangeklikt', // Als mailClicked true is
+          'Pas op, dit zou zomaar eens een phishing e-mail kunnen zijn',
+          ]
+        : [
+          'Het ziet er naar uit dat je na het spelen van het spel niet de link in de e-mail hebt aangeklikt', // Als mailClicked false is
+          'Dat is een goede keuze, want de afzender van deze mail zou zomaar eens niet te vertrouwen kunnen zijn',
+
+          ]),
+          'Let er altijd op of de URL klopt en of de afzender van de e-mail betrouwbaar is', // Altijd getoond
     ];
 
     this.h1RotationText = this.h1TextArray[0];
