@@ -16,7 +16,8 @@ export class HomeComponent implements OnInit {
   userProfiles: UserProfile[] = [];
   isLoading = true;
   error: string | null = null;
-  selectedProfile!: UserProfile;
+  selectedProfile: UserProfile | null = null;
+  showOverlay = false;
 
   constructor(private replayService: ReplayService, private router: Router) { }
 
@@ -35,9 +36,22 @@ export class HomeComponent implements OnInit {
 
   }
 
-  startReplay(id: string): void {
-    this.router.navigate(['/replay'], { queryParams: { id } });
+  openOverlay(profile: UserProfile): void {
+    this.selectedProfile = profile;
+    this.showOverlay = true;
   }
 
+  startReplay(id: string | undefined): void {
+    if (id) {
+      this.router.navigate(['/replay'], { queryParams: { id } });
+    } else {
+      console.error('Cannot start replay: ID is undefined');
+    }
+  }
+
+  closeOverlay(): void {
+    this.showOverlay = false;
+    this.selectedProfile = null;
+  }
 
 }

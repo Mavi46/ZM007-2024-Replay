@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ɵDeferBlockConfig } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { TypewriterDirective } from '../directives/typewriter.directive';
@@ -49,6 +49,9 @@ export class ReplayComponent {
 
   //User Profile
   userProfile!: UserProfile | null;
+  qrScanned: boolean = false;
+  mailClicked: boolean = false;
+
 
   // Screen HCI
   hciPopup: boolean = false;
