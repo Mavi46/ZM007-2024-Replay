@@ -27,7 +27,6 @@ import { TimerBarComponent } from '../timer-bar/timer-bar.component';
 })
 export class ReplayComponent {
   curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75', '#29366F']; // Purple HCI, Red SE, Green DataE, Blue Security, Ending Yellow, (Ending)
-  // curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75','#29366F']; // Purple HCI, Red SE, Green DataE, Blue Security, Ending Yellow, (Ending)
   // curtainColors = ['#3B5DC9'];
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
