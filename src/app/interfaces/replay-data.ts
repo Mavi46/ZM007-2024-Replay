@@ -27,9 +27,18 @@ export interface LinkedInText {
     content: string;
 }
 
-export interface UserProfile {
+export interface ApiUserProfile {
+    _id?: { $oid: string } | string;
     name: string;
     email: string;
     status: string;
-    linkedIn: string[];
+    linkedIn?: string[];
+}
+
+export interface UserProfile {
+    id: string; // MongoDb Id
+    name: string;
+    email: string;
+    status: string;
+    linkedIn?: string[];
 }
