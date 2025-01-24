@@ -27,7 +27,9 @@ import { TimerBarComponent } from '../timer-bar/timer-bar.component';
 })
 export class ReplayComponent {
   // curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75', '#29366F']; // Purple HCI, Red SE, Green DataE, Blue Security, Ending Yellow, (Ending)
-  curtainColors = ['#3B5DC9'];
+  // curtainColors = ['#00BA85'];
+  curtainColors: string[] = [];
+  isData: boolean = false;
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
   nextCurtainColor = this.curtainColors[this.currentColorIndex];
@@ -49,9 +51,6 @@ export class ReplayComponent {
 
   //User Profile
   userProfile!: UserProfile | null;
-  qrScanned: boolean = true;
-  mailClicked: boolean = true;
-
 
   // Screen HCI
   hciPopup: boolean = false;
@@ -75,6 +74,14 @@ export class ReplayComponent {
             if (profile) {
               this.userProfile = profile;
               window.addEventListener('keydown', this.onKeyDown.bind(this));
+              if (profile.linkedIn) {
+                this.curtainColors = ['#00BA85', '#B13E53', '#5D275D', '#3B5DC9', '#FFCD75', '#29366F'];
+                this.isData = true;
+              } else {
+                this.curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75', '#29366F'];
+              }
+              // this.curtainColor = '#29366F';
+              this.curtainColor = this.curtainColors[this.currentColorIndex];
               this.openCurtain();
             } else {
               console.warn('No profile found for ID:', id);
@@ -423,29 +430,29 @@ start()`;
         : ['... Helaas', 'Wij hebben geen informatie over jou kunnen vinden', 'Blijkbaar heb jij je digitale voetafdruk goed op orde']), // Alleen als je geen data hebt
       'Wees altijd bewust van wat je openbaar hebt staan en welke gegevens je deelt', // Altijd getoond
 
-      ...(this.qrScanned
+      ...(this.userProfile?.qrScanned
         ? [
           'Het ziet er naar uit dat je na het spelen van het spel de QR-code hebt gescand', // Als qrScanned true is
-          
-          ]
+
+        ]
         : [
           'Het ziet er naar uit dat je na het spelen van het spel niet de QR-code hebt gescand', // Als qrScanned false is
           'Dat is een goede keuze, want je weet niet wat er achter een QR-code zit'
-          ]),
-          'Dit zou zomaar eens een link kunnen zijn die niet veilig is', // Altijd getoond
-          'Wees je altijd bewust van welke links je opent',
+        ]),
+      'Dit zou zomaar eens een link kunnen zijn die niet veilig is', // Altijd getoond
+      'Wees je altijd bewust van welke links je opent',
 
-      ...(this.mailClicked
+      ...(this.userProfile?.mailClicked
         ? [
           'Het ziet er naar uit dat je na het spelen van het spel de link in de e-mail hebt aangeklikt', // Als mailClicked true is
           'Pas op, dit zou zomaar eens een phishing e-mail kunnen zijn',
-          ]
+        ]
         : [
           'Het ziet er naar uit dat je na het spelen van het spel niet de link in de e-mail hebt aangeklikt', // Als mailClicked false is
           'Dat is een goede keuze, want de afzender van deze mail zou zomaar eens niet te vertrouwen kunnen zijn',
 
-          ]),
-          'Let er altijd op of de URL klopt en of de afzender van de e-mail betrouwbaar is', // Altijd getoond
+        ]),
+      'Let er altijd op of de URL klopt en of de afzender van de e-mail betrouwbaar is', // Altijd getoond
     ];
 
     this.h1RotationText = this.h1TextArray[0];
