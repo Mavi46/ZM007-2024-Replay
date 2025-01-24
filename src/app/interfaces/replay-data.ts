@@ -33,6 +33,8 @@ export interface ApiUserProfile {
     email: string;
     status: string;
     linkedIn?: string[];
+    qrScanned: boolean;
+    mailClicked: boolean;
 }
 
 export interface UserProfile {
@@ -41,4 +43,6 @@ export interface UserProfile {
     email: string;
     status: string;
     linkedIn?: string[];
+    qrScanned: boolean;
+    mailClicked: boolean;
 }
