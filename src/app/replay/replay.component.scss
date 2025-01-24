@@ -90,6 +90,8 @@ body {
 // Styling for each screen
 // Purple HCI
 .h1-hci {
+    position: relative;
+    z-index: 0;
     margin-top: 20%;
     font-size: 30px;
 }
@@ -109,14 +111,21 @@ body {
 
 // om de titel van het vakgebied netjes te houden
 .titelvakgebied {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-top: 50px;
-    margin-bottom: -180px;  
+    font-size: 25px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #566c86;
+    margin-top: 10px;
+    margin-bottom: -150px;  
+    background-color: #1a1c2c;
+    padding-top: 30px;
+    position: relative;
+    z-index: 1;
 } 
 
 // Red Software Engineering 
 .h1-se {
+    position: relative;
+    z-index: 0;
     margin-top: 20%;
     font-size: 30px;
 }
@@ -141,15 +150,18 @@ body {
 
 // Green Data Engineering
 .h1-de {
+    position: relative;
+    z-index: 0;
     margin-top: 20%;
     font-size: 30px;
 }
 
 // Blue Security & Cloud
 .h1-sc {
+    position: relative;
+    z-index: 0;
     margin-top: 20%;
     font-size: 30px;
-    //z-index: 2;
 }
  
 .video-player {
@@ -158,10 +170,12 @@ body {
     transform: translateX(-50%);
     height: 50%;
     display: block;
-    box-shadow: 0px 0px 40px 40px #171b27;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #2e354f;
 }
 
-// Ending
+// Ending  v
 .h1-end {
     margin-top: 20%;
     font-size: 30px;
