@@ -187,27 +187,10 @@ export class ReplayComponent {
       } else if (event.code === 'ArrowRight') {
         event.preventDefault();
         this.nextAction();
-      } else if (event.code === 'ArrowLeft') {
-        event.preventDefault();
-        this.previousAction();
+      } 
       }
     }
-  }
 
-  previousAction(): void {
-    this.timeRemaining = this.timerDuration;
-    
-    if (this.h1CurrentTextIndex > 0) {
-      this.h1State = 'out'; // Trigger animation out
-      setTimeout(() => {
-        this.h1CurrentTextIndex--;
-        this.h1RotationText = this.h1TextArray[this.h1CurrentTextIndex];
-        this.h1State = 'in'; // Trigger animation in
-      }, 500);
-    } else {
-      console.log('No previous text available.');
-    }
-  }
 
   nextAction(): void {
     if (this.curtainColor === '#5D275D') { // Purple - HCI
