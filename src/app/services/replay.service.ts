@@ -52,8 +52,17 @@ export class ReplayService {
           qrScanned: true,
           mailClicked: true,
         };
-        this.profilesCache = [mockProfile]; // Cache alleen mock data
-        return of([mockProfile]); // Retourneer mock data als Observable
+        const mockProfile2: UserProfile = {
+          id: '998877aa81b048899cd56b7b',
+          name: 'Alex P',
+          email: 'alexp@example.com',
+          status: 'done',
+          linkedIn: [],
+          qrScanned: false,
+          mailClicked: false,
+        };
+        this.profilesCache = [mockProfile, mockProfile2]; // Cache alleen mock data
+        return of([mockProfile, mockProfile2]); // Retourneer mock data als Observable
       })
     );
   }

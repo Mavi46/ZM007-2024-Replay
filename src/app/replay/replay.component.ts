@@ -75,7 +75,7 @@ export class ReplayComponent {
               this.userProfile = profile;
               window.addEventListener('keydown', this.onKeyDown.bind(this));
               if (profile.linkedIn) {
-                this.curtainColors = ['#00BA85', '#B13E53', '#5D275D', '#3B5DC9', '#FFCD75', '#29366F'];
+                this.curtainColors = ['#00BA85', '#5D275D', '#B13E53', '#3B5DC9', '#FFCD75', '#29366F'];
                 this.isData = true;
               } else {
                 this.curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75', '#29366F'];
@@ -187,9 +187,10 @@ export class ReplayComponent {
       } else if (event.code === 'ArrowRight') {
         event.preventDefault();
         this.nextAction();
+      } 
       }
     }
-  }
+
 
   nextAction(): void {
     if (this.curtainColor === '#5D275D') { // Purple - HCI
@@ -406,10 +407,14 @@ start()`;
 
   provideRedText(): void {
     this.h1TextArray = [
-      'Software engineering is het vakgebied dat zich bezighoudt met het ontwikkelen van verschillende soorten applicaties die aansluiten op de behoeften van de gebruiker',
-      'Dit is wat wij met de ontvangen gegevens kunnen maken',
-      'Nu zijn wij natuurlijk nieuwsgierig naar jou',
-      'Dit is wat wij nu kunnen',
+      ...(this.userProfile?.linkedIn ? ['Wij hebben zelf een tool gebouwd om met jouw naam en e-mailadres gegevens te achterhalen', // als wel data
+      'Dit ziet er zo uit',
+      'Dit leer je bij Software engineering het vakgebied dat zich bezighoudt met het ontwikkelen van verschillende soorten applicaties die aansluiten op de behoeften van de gebruiker'] 
+        :
+         ['Software engineering is het vakgebied dat zich bezighoudt met het ontwikkelen van verschillende soorten applicaties die aansluiten op de behoeften van de gebruiker', //als geen data
+          'Omdat jij ons zomaar je gegevens hebt gegeven, zijn we natuurlijk nieuwsgierig naar jou',
+          'Dit is wat wij nu kunnen',
+         ]),
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
@@ -419,8 +424,9 @@ start()`;
     const userProfileName = this.userProfile?.name;
 
     this.h1TextArray = [
-      'Data engineering is het vakgebied dat zich bezighoudt met het verzamelen, opslaan en analyseren van data',
-      'Eens kijken wat wij kunnen vinden over jou',
+      
+      ...(!this.userProfile?.linkedIn ? ['Data engineering is het vakgebied dat zich bezighoudt met het verzamelen, opslaan en analyseren van data',
+        'Eens kijken wat wij kunnen vinden over jou'] : []),
       `Hallo ${userProfileName}`,
       ...(this.userProfile?.linkedIn?.length
         ? [
@@ -433,10 +439,11 @@ start()`;
       ...(this.userProfile?.qrScanned
         ? [
           'Het ziet er naar uit dat je na het spelen van het spel de QR-code hebt gescand', // Als qrScanned true is
+          'Ook al denk je in een vertrouwde omgeving te zijn pas altijd op om een QR-code te scannen, hackers zouden op deze manier een virus kunnen installeren',
 
         ]
         : [
-          'Het ziet er naar uit dat je na het spelen van het spel niet de QR-code hebt gescand', // Als qrScanned false is
+          'Het ziet er naar uit dat je na het spelen van het spel de QR-code niet hebt gescand', // Als qrScanned false is
           'Dat is een goede keuze, want je weet niet wat er achter een QR-code zit'
         ]),
       'Dit zou zomaar eens een link kunnen zijn die niet veilig is', // Altijd getoond
@@ -453,6 +460,9 @@ start()`;
 
         ]),
       'Let er altijd op of de URL klopt en of de afzender van de e-mail betrouwbaar is', // Altijd getoond
+
+      ...(this.userProfile?.linkedIn, ['Benieuwd hoe wij deze applicatie hebben ontwikkeld?', 'Het ophalen van jouw data valt onder Data Engineering',
+        'Data engineering is het vakgebied dat zich bezighoudt met het verzamelen, opslaan en analyseren van data']), // Alleen als je data hebt
     ];
 
     this.h1RotationText = this.h1TextArray[0];
@@ -462,7 +472,7 @@ start()`;
   provideBlueText(): void {
     this.h1TextArray = [
       'Security & Cloud is het vakgebied dat zich bezighoudt met het beveiligen van data en applicaties in de cloud zodat gebruikers veilig met de applicaties kunnen werken',
-      'Benieuwd hoe wij dit gedaan hebben?',
+      'Benieuwd hoe dit proces liep terwijl jij bezig was met de games?',
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
