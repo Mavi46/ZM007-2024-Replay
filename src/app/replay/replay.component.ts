@@ -26,10 +26,11 @@ import { TimerBarComponent } from '../timer-bar/timer-bar.component';
   ]
 })
 export class ReplayComponent {
-  // curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75', '#29366F']; // Purple HCI, Red SE, Green DataE, Blue Security, Ending Yellow, (Ending)
+  // curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75']; // Purple HCI, Red SE, Green DataE, Blue Security, Ending Yellow, (Ending)
   // curtainColors = ['#00BA85'];
   curtainColors: string[] = [];
-  isData: boolean = false;
+  isLinkedInData: boolean = false;
+  isFacebookData: boolean = false;
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
   nextCurtainColor = this.curtainColors[this.currentColorIndex];
@@ -74,14 +75,19 @@ export class ReplayComponent {
             if (profile) {
               this.userProfile = profile;
               window.addEventListener('keydown', this.onKeyDown.bind(this));
-              if (profile.linkedIn) {
-                this.curtainColors = ['#00BA85', '#B13E53', '#5D275D', '#3B5DC9', '#FFCD75', '#29366F'];
-                this.isData = true;
+              if (profile.linkedIn!.length > 0 || profile.facebookData!.length > 0) {
+                this.curtainColors = ['#00BA85', '#B13E53', '#5D275D', '#3B5DC9', '#FFCD75'];
+                // this.curtainColors = ['#FFCD75'];  
+                if (profile.linkedIn!.length > 0) {
+                  this.isLinkedInData = true;
+                } if (profile.facebookData!.length > 0) {
+                  this.isFacebookData = true;
+                }
               } else {
-                this.curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75', '#29366F'];
+                this.curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75'];
               }
-              // this.curtainColor = '#29366F';
               this.curtainColor = this.curtainColors[this.currentColorIndex];
+              console.log(this.isFacebookData, this.isLinkedInData);
               this.openCurtain();
             } else {
               console.warn('No profile found for ID:', id);
@@ -123,9 +129,6 @@ export class ReplayComponent {
         this.startTimer();
       } if (this.curtainColor === '#FFCD75') { // Yellow - Ending
         this.provideYellowText();
-        this.startTimer();
-      } if (this.curtainColor === '#29366F') { // Ending
-        this.provideEndingText();
         this.startTimer();
       }
     }, 3000);
@@ -234,20 +237,9 @@ export class ReplayComponent {
       }
     } if (this.curtainColor === '#FFCD75') { // Yellow - Ending
       if (!this.screenElementsShowed) {
+        this.controlLock(true);
         this.yellowNextElement();
       } else {
-        this.screenElementsShowed = false;
-        this.h1CurrentTextIndex = 0;
-        this.closeCurtains();
-      }
-    } if (this.curtainColor === '#29366F') { // Ending
-      if (!this.screenElementsShowed) {
-        this.controlLock(true);
-        this.endingNextelement();
-      } else {
-        this.screenElementsShowed = false;
-        this.h1CurrentTextIndex = 0;
-        this.controlLock(false);
         this.closeCurtains();
       }
     }
@@ -353,38 +345,6 @@ start()`;
   }
 
 
-  NextElement(): void {
-    if (this.h1CurrentTextIndex < this.h1TextArray.length - 1) {
-      this.h1State = 'out';
-      setTimeout(() => {
-        this.h1CurrentTextIndex++;
-        this.h1RotationText = this.h1TextArray[this.h1CurrentTextIndex];
-        this.h1State = 'in';
-      }, 500);
-    } else {
-      this.isPaused = true; // Timer will be paused to play the full video
-      this.showVideo = true;
-      this.screenElementsShowed = true;
-    }
-  }
-
-  endingNextelement(): void {
-    this.isPaused = false; // Timer will proceed as the timer is paused on the previous screen.
-    if (this.h1CurrentTextIndex < this.h1TextArray.length - 1) {
-      this.h1State = 'out';
-      setTimeout(() => {
-        this.h1CurrentTextIndex++;
-        this.h1RotationText = this.h1TextArray[this.h1CurrentTextIndex];
-        this.h1State = 'in';
-
-        // Check if it is the last element to set the flag
-        if (this.h1CurrentTextIndex === this.h1TextArray.length - 1) {
-          this.screenElementsShowed = true;
-        }
-      }, 500);
-    }
-  }
-
 
 
 
@@ -396,9 +356,9 @@ start()`;
   providePurpleText(): void {
     this.h1TextArray = [
       'Human-computer interaction (HCI) is een vakgebied binnen de informatiekunde dat zich bezighoudt met onderzoek naar de interactie (wisselwerking) tussen mensen (gebruikers) en machines (waaronder computers)',
-      'Onze applicatie is ontworpen op basis van specifieke keuzes die zijn gemaakt aan de hand van designprincipes',
+      'Het project is ontworpen op basis van specifieke keuzes die zijn gemaakt aan de hand van designprincipes',
       'Met een leaderboard en spellen trekken wij de aandacht van bezoekers',
-      'Hiermee hebben wij nu de volgende gegevens over jou:'
+      'En daarmee heb jij ons zomaar de volgende gegevens gegeven:'
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
@@ -406,10 +366,8 @@ start()`;
 
   provideRedText(): void {
     this.h1TextArray = [
-      'Software engineering is het vakgebied dat zich bezighoudt met het ontwikkelen van verschillende soorten applicaties die aansluiten op de behoeften van de gebruiker',
-      'Dit is wat wij met de ontvangen gegevens kunnen maken',
-      'Nu zijn wij natuurlijk nieuwsgierig naar jou',
-      'Dit is wat wij nu kunnen',
+      'Software engineering is het vakgebied dat zich bezighoudt met het ontwikkelen van verschillende soorten applicaties die aansluiten op de behoeften van de opdrachtgever',
+      'Ook wij hebben een eigen applicatie gebouwd en deze ziet er voor een deel zo uit:',
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
@@ -420,7 +378,6 @@ start()`;
 
     this.h1TextArray = [
       'Data engineering is het vakgebied dat zich bezighoudt met het verzamelen, opslaan en analyseren van data',
-      'Eens kijken wat wij kunnen vinden over jou',
       `Hallo ${userProfileName}`,
       ...(this.userProfile?.linkedIn?.length
         ? [
@@ -441,18 +398,6 @@ start()`;
         ]),
       'Dit zou zomaar eens een link kunnen zijn die niet veilig is', // Altijd getoond
       'Wees je altijd bewust van welke links je opent',
-
-      ...(this.userProfile?.mailClicked
-        ? [
-          'Het ziet er naar uit dat je na het spelen van het spel de link in de e-mail hebt aangeklikt', // Als mailClicked true is
-          'Pas op, dit zou zomaar eens een phishing e-mail kunnen zijn',
-        ]
-        : [
-          'Het ziet er naar uit dat je na het spelen van het spel niet de link in de e-mail hebt aangeklikt', // Als mailClicked false is
-          'Dat is een goede keuze, want de afzender van deze mail zou zomaar eens niet te vertrouwen kunnen zijn',
-
-        ]),
-      'Let er altijd op of de URL klopt en of de afzender van de e-mail betrouwbaar is', // Altijd getoond
     ];
 
     this.h1RotationText = this.h1TextArray[0];
@@ -473,19 +418,12 @@ start()`;
       'Dit was het einde van onze ICT-ervaring. Bedankt voor je deelname!',
       'We houden je op de hoogte als je een prijs gewonnen hebt. Houd je e-mail in de gaten voor meer informatie.',
       'Als je meer over dit project wil weten, stel gerust vragen of bekijk de extra informatie.',
-      'Geen zorgen, je gegevens worden tijdelijk opgeslagen en meteen verwijderd na het bekijken van de replay.',
+      'Geen zorgen, je gegevens worden meteen verwijderd na het bekijken van de replay.',
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
   }
 
-  provideEndingText(): void {
-    this.h1TextArray = [
-      'Afsluiting'
-    ];
-    this.h1RotationText = this.h1TextArray[0];
-    this.h1State = 'in';
-  }
 
 
 
@@ -499,6 +437,7 @@ start()`;
 
   closeCurtains(): void {
     if (this.currentColorIndex === this.curtainColors.length - 1) {
+      this.curtainOpened = false;
       return;
     }
     this.curtainOpened = false;
