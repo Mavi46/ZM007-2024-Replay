@@ -31,7 +31,6 @@ export class ReplayService {
             status: profile.status,
             linkedIn: profile.linkedIn || [], // Zorg dat linkedIn altijd een array is
             qrScanned: profile.qrScanned,
-            mailClicked: profile.mailClicked
           }))
       ),
       tap((filteredProfiles) => {
@@ -50,7 +49,6 @@ export class ReplayService {
             'En daar ga je dan, Reinier Geppaard, met je inspiratie om processen te automatiseren, je carrièredoelen al vroeg in het leven vastgesteld en altijd op zoek naar nieuwe kennis in de IT-wereld. Wat een unieke persoonlijkheid!'
           ],
           qrScanned: true,
-          mailClicked: true,
         };
         this.profilesCache = [mockProfile]; // Cache alleen mock data
         return of([mockProfile]); // Retourneer mock data als Observable

@@ -10,7 +10,8 @@
                 <h2>{{ profile.name }} <i (click)="openOverlay(profile)" class="pi pi-play"
                         style="font-size: 1rem; cursor: pointer;"></i></h2>
                 <p>#{{profile.id}}</p>
-                <p>QR: {{profile.qrScanned}}, Mail: {{profile.mailClicked}}</p>
+                <p>LinkedIn: {{profile.linkedIn?.length}}</p>
+                <p>QR: {{profile.qrScanned}}</p>
                 <p>Status: {{ profile.status }}</p>
             </div>
         </div>
