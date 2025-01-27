@@ -34,7 +34,7 @@ export interface ApiUserProfile {
     status: string;
     linkedIn?: string[];
     qrScanned: boolean;
-    mailClicked: boolean;
+    facebookData?: string[];
 }
 
 export interface UserProfile {
@@ -44,5 +44,5 @@ export interface UserProfile {
     status: string;
     linkedIn?: string[];
     qrScanned: boolean;
-    mailClicked: boolean;
+    facebookData?: string[];
 }
