@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.replayService.getAllUserProfiles().subscribe({
       next: (profiles) => {
+        console.log(profiles);
         this.userProfiles = profiles;
         this.isLoading = false;
       },

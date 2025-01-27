@@ -29,7 +29,8 @@ export class ReplayComponent {
   // curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75']; // Purple HCI, Red SE, Green DataE, Blue Security, Ending Yellow, (Ending)
   // curtainColors = ['#00BA85'];
   curtainColors: string[] = [];
-  isData: boolean = false;
+  isLinkedInData: boolean = false;
+  isFacebookData: boolean = false;
   currentColorIndex = 0;
   curtainColor = this.curtainColors[this.currentColorIndex];
   nextCurtainColor = this.curtainColors[this.currentColorIndex];
@@ -74,15 +75,19 @@ export class ReplayComponent {
             if (profile) {
               this.userProfile = profile;
               window.addEventListener('keydown', this.onKeyDown.bind(this));
-              if (profile.linkedIn) {
+              if (profile.linkedIn!.length > 0 || profile.facebookData!.length > 0) {
                 this.curtainColors = ['#00BA85', '#B13E53', '#5D275D', '#3B5DC9', '#FFCD75'];
-                // this.curtainColors = ['#FFCD75'];
-                this.isData = true;
+                // this.curtainColors = ['#FFCD75'];  
+                if (profile.linkedIn!.length > 0) {
+                  this.isLinkedInData = true;
+                } if (profile.facebookData!.length > 0) {
+                  this.isFacebookData = true;
+                }
               } else {
                 this.curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75'];
               }
-              // this.curtainColor = '#29366F';
               this.curtainColor = this.curtainColors[this.currentColorIndex];
+              console.log(this.isFacebookData, this.isLinkedInData);
               this.openCurtain();
             } else {
               console.warn('No profile found for ID:', id);
