@@ -6,11 +6,13 @@ import { UserProfile } from '../interfaces/replay-data';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReplayService } from '../services/replay.service';
 import { TimerBarComponent } from '../timer-bar/timer-bar.component';
+import { CarouselModule } from 'primeng/carousel';
+
 
 @Component({
   selector: 'app-replay',
   standalone: true,
-  imports: [CommonModule, TypewriterDirective, TimerBarComponent],
+  imports: [CommonModule, TypewriterDirective, TimerBarComponent, CarouselModule],
   templateUrl: './replay.component.html',
   styleUrl: './replay.component.scss',
   animations: [
@@ -56,6 +58,10 @@ export class ReplayComponent {
   // Screen HCI
   hciPopup: boolean = false;
 
+  // Screen DE
+  facebookDataString: string[] = [];
+  facebookDataVisible: boolean = false;
+
   // Screen SE
   typedScriptName: string = '';
   typedScriptContent: string = '';
@@ -74,6 +80,7 @@ export class ReplayComponent {
           next: (profile) => {
             if (profile) {
               this.userProfile = profile;
+              this.facebookDataString = profile.facebookData as string[];
               window.addEventListener('keydown', this.onKeyDown.bind(this));
               if (profile.linkedIn!.length > 0 || profile.facebookData!.length > 0) {
                 this.curtainColors = ['#00BA85', '#B13E53', '#5D275D', '#3B5DC9', '#FFCD75'];
@@ -298,19 +305,41 @@ start()`;
   }
 
   greenNextElement(): void {
+    // if (this.h1CurrentTextIndex < this.h1TextArray.length - 1) {
+    //   this.h1State = 'out';
+    //   setTimeout(() => {
+    //     this.h1CurrentTextIndex++;
+    //     this.h1RotationText = this.h1TextArray[this.h1CurrentTextIndex];
+    //     this.h1State = 'in';
+
+    //     // Check if it is the last element to set the flag
+    //     if (this.h1CurrentTextIndex === this.h1TextArray.length - 1) {
+    //       this.screenElementsShowed = true;
+    //     }
+    //   }, 500);
+
+    // }
+
     if (this.h1CurrentTextIndex < this.h1TextArray.length - 1) {
       this.h1State = 'out';
       setTimeout(() => {
         this.h1CurrentTextIndex++;
         this.h1RotationText = this.h1TextArray[this.h1CurrentTextIndex];
         this.h1State = 'in';
-
-        // Check if it is the last element to set the flag
-        if (this.h1CurrentTextIndex === this.h1TextArray.length - 1) {
-          this.screenElementsShowed = true;
-        }
       }, 500);
+    } else {
+      this.h1State = 'out';
+      setTimeout(() => {
+        this.h1RotationText = 'Oh, wat ken jij veel mensen!'
+        this.h1State = 'in';
+      }, 500);
+      setTimeout(() => {
+        this.facebookDataVisible = true;
+      }, 2000);
+      this.screenElementsShowed = true;
     }
+
+
   }
 
   blueNextElement(): void {
@@ -376,6 +405,7 @@ start()`;
   provideGreenText(): void {
     const userProfileName = this.userProfile?.name;
 
+
     this.h1TextArray = [
       'Data engineering is het vakgebied dat zich bezighoudt met het verzamelen, opslaan en analyseren van data',
       `Hallo ${userProfileName}`,
@@ -402,6 +432,7 @@ start()`;
 
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
+
   }
 
   provideBlueText(): void {
