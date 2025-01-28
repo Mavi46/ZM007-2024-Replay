@@ -60,7 +60,6 @@ export class ReplayService {
           status: 'done',
           linkedIn: [],
           qrScanned: false,
-          mailClicked: false,
         };
         this.profilesCache = [mockProfile, mockProfile2]; // Cache alleen mock data
         return of([mockProfile, mockProfile2]); // Retourneer mock data als Observable
