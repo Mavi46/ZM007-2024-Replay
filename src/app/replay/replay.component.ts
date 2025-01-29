@@ -329,22 +329,16 @@ start()`;
 
         //Check if it is the last element to set the flag
         if (this.h1CurrentTextIndex === this.h1TextArray.length - 1) {
-          this.screenElementsShowed = true;
 
           if (this.isFacebookData) {
-            this.h1State = 'out';
-            setTimeout(() => {
-              this.h1State = 'out';
-              this.h1RotationText = 'Ken jij deze mensen nog?';
-              this.h1State = 'in';
-            }, 500);
             setTimeout(() => {
               this.facebookDataVisible = true;
             }, 2000);
-            this.screenElementsShowed = true;
           }
+          this.screenElementsShowed = true;
         }
       }, 500);
+
     }
   }
 
@@ -432,8 +426,9 @@ start()`;
           'Dat is een goede keuze, want je weet niet wat er achter een QR-code zit'
         ]),
 
-        ...(this.isFacebookData? ['Dat is nog niet alles...'] : []), // Alleen als er Facebook data is
+      ...(this.userProfile?.facebookData?.length ? ['Dat is nog niet alles...', 'Ken jij deze mensen nog?'] : []), // Alleen als er Facebook data is
     ];
+    console.log(this.h1TextArray);
 
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
