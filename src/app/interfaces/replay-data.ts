@@ -38,7 +38,7 @@ export interface ApiUserProfile {
 }
 
 export interface UserProfile {
-    id: string; // MongoDb Id
+    id: string;
     name: string;
     email: string;
     status: string;
