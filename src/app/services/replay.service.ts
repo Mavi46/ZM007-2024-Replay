@@ -7,7 +7,8 @@ import { UserProfile, ApiUserProfile } from '../interfaces/replay-data';
   providedIn: 'root'
 })
 export class ReplayService {
-  private apiUrl = 'http://localhost:3000/api/scraper';
+  // private apiUrl = 'http://localhost:3000/api/scraper';
+  private apiUrl = 'http://10.0.1.14:3000/api/scraper';
   private profilesCache: UserProfile[] = [];
 
   constructor(private http: HttpClient) { }
@@ -29,7 +30,7 @@ export class ReplayService {
             name: profile.name,
             email: profile.email,
             status: profile.status,
-            linkedIn: profile.linkedIn || [], // Zorg dat linkedIn altijd een array is
+            linkedIn: profile.linkedIn || [],
             qrScanned: profile.qrScanned,
             facebookData: profile.facebookData || [],
           }))
