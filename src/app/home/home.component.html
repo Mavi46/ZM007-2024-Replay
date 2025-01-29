@@ -14,9 +14,6 @@
                 <p>Facebook: {{profile.facebookData?.length}}</p>
                 <p>QR: {{profile.qrScanned}}</p>
                 <p>Status: {{ profile.status }}</p>
-                <div *ngFor="let image of profile.facebookData">
-                    <img [src]="'data:image/jpeg;base64,' + image" alt="Facebook Image" />
-                </div>
             </div>
         </div>
     </div>

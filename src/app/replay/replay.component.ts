@@ -94,7 +94,7 @@ export class ReplayComponent {
                 this.curtainColors = ['#5D275D', '#B13E53', '#00BA85', '#3B5DC9', '#FFCD75'];
               }
               this.curtainColor = this.curtainColors[this.currentColorIndex];
-              console.log(this.isFacebookData, this.isLinkedInData);
+              // console.log(this.isFacebookData, this.isLinkedInData);
               this.openCurtain();
             } else {
               console.warn('No profile found for ID:', id);
@@ -174,12 +174,12 @@ export class ReplayComponent {
   controlLock(short: boolean): void {
     this.controlsActive = false;
     if (short) {
-      console.log('Lock, 2 seconden.');
+      // console.log('Lock, 2 seconden.');
       setTimeout(() => {
         this.controlsActive = true;
       }, 2000);
     } else {
-      console.log('Lock, 6 seconden.');
+      // console.log('Lock, 6 seconden.');
       setTimeout(() => {
         this.controlsActive = true;
       }, 6000);
@@ -333,7 +333,7 @@ start()`;
           if (this.isFacebookData) {
             setTimeout(() => {
               this.facebookDataVisible = true;
-            }, 2000);
+            }, 1000);
           }
           this.screenElementsShowed = true;
         }
@@ -428,7 +428,6 @@ start()`;
 
       ...(this.userProfile?.facebookData?.length ? ['Dat is nog niet alles...', 'Ken jij deze mensen nog?'] : []), // Alleen als er Facebook data is
     ];
-    console.log(this.h1TextArray);
 
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
