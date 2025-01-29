@@ -83,7 +83,7 @@ export class ReplayComponent {
               this.facebookDataString = profile.facebookData as string[];
               window.addEventListener('keydown', this.onKeyDown.bind(this));
               if (profile.linkedIn!.length > 0 || profile.facebookData!.length > 0) {
-                this.curtainColors = ['#00BA85', '#B13E53', '#5D275D', '#3B5DC9', '#FFCD75'];
+                this.curtainColors = ['#00BA85', '#5D275D', '#B13E53', '#3B5DC9', '#FFCD75'];
                 // this.curtainColors = ['#FFCD75'];  
                 if (profile.linkedIn!.length > 0) {
                   this.isLinkedInData = true;
@@ -326,20 +326,26 @@ start()`;
         this.h1CurrentTextIndex++;
         this.h1RotationText = this.h1TextArray[this.h1CurrentTextIndex];
         this.h1State = 'in';
+
+        //Check if it is the last element to set the flag
+        if (this.h1CurrentTextIndex === this.h1TextArray.length - 1) {
+          this.screenElementsShowed = true;
+
+          if (this.isFacebookData) {
+            this.h1State = 'out';
+            setTimeout(() => {
+              this.h1State = 'out';
+              this.h1RotationText = 'Ken jij deze mensen nog?';
+              this.h1State = 'in';
+            }, 500);
+            setTimeout(() => {
+              this.facebookDataVisible = true;
+            }, 2000);
+            this.screenElementsShowed = true;
+          }
+        }
       }, 500);
-    } else {
-      this.h1State = 'out';
-      setTimeout(() => {
-        this.h1RotationText = 'Oh, wat ken jij veel mensen!'
-        this.h1State = 'in';
-      }, 500);
-      setTimeout(() => {
-        this.facebookDataVisible = true;
-      }, 2000);
-      this.screenElementsShowed = true;
     }
-
-
   }
 
   blueNextElement(): void {
@@ -385,9 +391,8 @@ start()`;
   providePurpleText(): void {
     this.h1TextArray = [
       'Human-computer interaction (HCI) is een vakgebied binnen de informatiekunde dat zich bezighoudt met onderzoek naar de interactie (wisselwerking) tussen mensen (gebruikers) en machines (waaronder computers)',
-      'Het project is ontworpen op basis van specifieke keuzes die zijn gemaakt aan de hand van designprincipes',
-      'Met een leaderboard en spellen trekken wij de aandacht van bezoekers',
-      'En daarmee heb jij ons zomaar de volgende gegevens gegeven:'
+      'Onze applicatie is ontworpen op basis van specifieke keuzes die zijn gemaakt aan de hand van designprincipes',
+      'Met een leaderboard en spellen hebben wij jouw aandacht getrokken, hierdoor heb jij ons zomaar de volgende gegevens gegeven:',
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
@@ -414,20 +419,20 @@ start()`;
           ...this.userProfile.linkedIn,
           'Dit was erg makkelijk te vinden', //Alleen als je data hebt
         ]
-        : ['... Helaas', 'Wij hebben geen informatie over jou kunnen vinden', 'Blijkbaar heb jij je digitale voetafdruk goed op orde']), // Alleen als je geen data hebt
+        : ['Wij hebben geen gegevens over jou kunnen vinden', 'Blijkbaar heb jij je digitale voetafdruk goed op orde']), // Alleen als je geen data hebt
       'Wees altijd bewust van wat je openbaar hebt staan en welke gegevens je deelt', // Altijd getoond
 
       ...(this.userProfile?.qrScanned
         ? [
           'Het ziet er naar uit dat je na het spelen van het spel de QR-code hebt gescand', // Als qrScanned true is
-
+          'Ook al denk je in een vertrouwde omgeving te zijn pas altijd op om een QR-code te scannen, hackers kunnen deze codes misbruiken',
         ]
         : [
-          'Het ziet er naar uit dat je na het spelen van het spel niet de QR-code hebt gescand', // Als qrScanned false is
+          'Het ziet er naar uit dat je na het spelen van het spel de QR-code niet hebt gescand', // Als qrScanned false is
           'Dat is een goede keuze, want je weet niet wat er achter een QR-code zit'
         ]),
-      'Dit zou zomaar eens een link kunnen zijn die niet veilig is', // Altijd getoond
-      'Wees je altijd bewust van welke links je opent',
+
+        ...(this.isFacebookData? ['Dat is nog niet alles...'] : []), // Alleen als er Facebook data is
     ];
 
     this.h1RotationText = this.h1TextArray[0];
@@ -449,7 +454,7 @@ start()`;
       'Dit was het einde van onze ICT-ervaring. Bedankt voor je deelname!',
       'We houden je op de hoogte als je een prijs gewonnen hebt. Houd je e-mail in de gaten voor meer informatie.',
       'Als je meer over dit project wil weten, stel gerust vragen of bekijk de extra informatie.',
-      'Geen zorgen, je gegevens worden meteen verwijderd na het bekijken van de replay.',
+      'Geen zorgen, je gegevens worden verwijderd nadat de prijsuitreiking heeft plaatsgevonden.',
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';

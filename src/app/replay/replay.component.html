@@ -56,7 +56,7 @@
                         <h1 class="h1-de text-center" [@slideInOut]="h1State">{{h1RotationText}}
                         </h1>
                         <div class="facebookData" *ngIf="facebookDataVisible">
-                            <p-carousel [value]="facebookDataString" [showNavigators]="false" [showIndicators]="false" [numVisible]="6" [numScroll]="1" [circular]="true" autoplayInterval="1500">
+                            <p-carousel [value]="facebookDataString" [showNavigators]="false" [showIndicators]="false" [numVisible]="6" [numScroll]="1" [circular]="true" autoplayInterval="1200">
                                 <ng-template pTemplate="item" let-item>
                                     <img [src]="'data:image/jpeg;base64,' + item" alt="Facebook Data Image"
                                     style="width: 50%; height: auto; margin: 0; padding: 0;" />
