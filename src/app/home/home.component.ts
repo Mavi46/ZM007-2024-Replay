@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   isLoading = true;
   error: string | null = null;
   selectedProfile: UserProfile | null = null;
+  selectedIndex: number | null = null;
   showOverlay = false;
 
   constructor(private replayService: ReplayService, private router: Router) { }
@@ -37,8 +38,9 @@ export class HomeComponent implements OnInit {
 
   }
 
-  openOverlay(profile: UserProfile): void {
+  openOverlay(profile: UserProfile, index: number): void {
     this.selectedProfile = profile;
+    this.selectedIndex = index;
     this.showOverlay = true;
   }
 
