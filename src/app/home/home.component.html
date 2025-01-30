@@ -6,17 +6,15 @@
         <div *ngIf="error">{{ error }}</div>
 
         <div *ngIf="!isLoading && userProfiles.length">
-            <div class="profile-card" *ngFor="let profile of userProfiles;">
-                <h2>{{ profile.name }} <i (click)="openOverlay(profile)" class="pi pi-play"
+            <div class="profile-card" *ngFor="let profile of userProfiles; let i = index">
+                <h2>{{ profile.name }} <i (click)="openOverlay(profile, i)" class="pi pi-play"
                         style="font-size: 1rem; cursor: pointer;"></i></h2>
+                <h2>#{{i}}</h2>
                 <p>#{{profile.id}}</p>
                 <p>LinkedIn: {{profile.linkedIn?.length}}</p>
                 <p>Facebook: {{profile.facebookData?.length}}</p>
                 <p>QR: {{profile.qrScanned}}</p>
                 <p>Status: {{ profile.status }}</p>
-                <div *ngFor="let image of profile.facebookData">
-                    <img [src]="'data:image/jpeg;base64,' + image" alt="Facebook Image" />
-                </div>
             </div>
         </div>
     </div>
@@ -27,8 +25,11 @@
 
 <div class="overlay" *ngIf="showOverlay">
     <div class="overlay-content">
-        <h1>{{ selectedProfile?.id }}</h1>
-        <p>Beste bezoeker, welkom bij de replay. Bla bla bla, controls, bla bla bla.</p>
+        <h1>Replay voor #{{ selectedIndex }}</h1>
+        <p>Beste bezoeker, hierna volgt de Replay.</p>
+        <p>De Replay is een korte presentatie over de vakgebieden binnen het ICT
+            domein. U kunt de timer van de presentatie met de spatiebalk pauzeren/hervatten en met de rechter pijltoets
+            kunt u naar het volgende element.</p>
         <button (click)="startReplay(selectedProfile?.id)">Start Replay</button>
         <button (click)="closeOverlay()">Annuleren</button>
     </div>
