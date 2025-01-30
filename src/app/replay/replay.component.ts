@@ -385,8 +385,8 @@ start()`;
   providePurpleText(): void {
     this.h1TextArray = [
       'Human-computer interaction (HCI) is een vakgebied binnen de informatiekunde dat zich bezighoudt met onderzoek naar de interactie (wisselwerking) tussen mensen (gebruikers) en machines (waaronder computers)',
-      'Onze applicatie is ontworpen op basis van specifieke keuzes die zijn gemaakt aan de hand van designprincipes',
-      'Met een leaderboard en spellen hebben wij jouw aandacht getrokken, hierdoor heb jij ons zomaar de volgende gegevens gegeven:',
+      'Onze applicatie is ontworpen op basis van specifieke keuzes, gemaakt aan de hand van designprincipes',
+      'We trokken je aandacht met een leaderboard en leuke spellen. En zonder dat je erbij stilstond, gaf je ons deze gegevens:',
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
@@ -419,14 +419,14 @@ start()`;
       ...(this.userProfile?.qrScanned
         ? [
           'Het ziet er naar uit dat je na het spelen van het spel de QR-code hebt gescand', // Als qrScanned true is
-          'Ook al denk je in een vertrouwde omgeving te zijn pas altijd op om een QR-code te scannen, hackers kunnen deze codes misbruiken',
+          'Ook al bevind je je in een vertrouwde omgeving, wees altijd voorzichtig bij het scannen van een QR-code. Hackers kunnen deze codes misbruiken',
         ]
         : [
           'Het ziet er naar uit dat je na het spelen van het spel de QR-code niet hebt gescand', // Als qrScanned false is
-          'Dat is een goede keuze, want je weet niet wat er achter een QR-code zit'
+          'Dat is een goede keuze, want je weet maar nooit wat er achter een QR-code verborgen zit'
         ]),
 
-      ...(this.userProfile?.facebookData?.length ? ['Dat is nog niet alles...', 'Ken jij deze mensen nog?'] : []), // Alleen als er Facebook data is
+      ...(this.userProfile?.facebookData?.length ? ['Ken jij deze mensen nog?'] : []), // Alleen als er Facebook data is
     ];
 
     this.h1RotationText = this.h1TextArray[0];
@@ -446,9 +446,9 @@ start()`;
   provideYellowText(): void {
     this.h1TextArray = [
       'Dit was het einde van onze ICT-ervaring. Bedankt voor je deelname!',
-      'We houden je op de hoogte als je een prijs gewonnen hebt. Houd je e-mail in de gaten voor meer informatie.',
-      'Als je meer over dit project wil weten, stel gerust vragen of bekijk de extra informatie.',
-      'Geen zorgen, je gegevens worden verwijderd nadat de prijsuitreiking heeft plaatsgevonden.',
+      'We laten je weten of je een prijs hebt gewonnen. Houd je e-mail in de gaten voor meer informatie',
+      'Als je meer wilt weten over dit project, stel gerust je vragen of bekijk de extra informatie',
+      'Geen zorgen, je gegevens worden verwijderd nadat de prijsuitreiking heeft plaatsgevonden',
     ];
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
