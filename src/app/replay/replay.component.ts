@@ -331,6 +331,9 @@ start()`;
         if (this.h1CurrentTextIndex === this.h1TextArray.length - 1) {
 
           if (this.isFacebookData) {
+            this.h1State = 'out';
+            this.h1RotationText = 'Ken jij deze mensen nog?';
+            this.h1State = 'in';
             setTimeout(() => {
               this.facebookDataVisible = true;
             }, 1000);
@@ -426,9 +429,9 @@ start()`;
           'Dat is een goede keuze, want je weet maar nooit wat er achter een QR-code verborgen zit'
         ]),
 
-      ...(this.userProfile?.facebookData?.length ? ['Ken jij deze mensen nog?'] : []), // Alleen als er Facebook data is
+      // ...(this.userProfile?.facebookData?.length ? ['Ken jij deze mensen nog?'] : []), // Alleen als er Facebook data is
     ];
-
+    console.log(this.h1TextArray);
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
 

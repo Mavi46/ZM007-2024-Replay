@@ -38,6 +38,17 @@ export class HomeComponent implements OnInit {
 
   }
 
+  fetchData(): void {
+    this.replayService.fetchAllUserProfiles().subscribe({
+      next: (profiles) => {
+        this.userProfiles = profiles;
+      },
+      error: (err) => {
+        console.error('Error fetching user profiles:', err);
+      }
+    });
+  }
+
   openOverlay(profile: UserProfile, index: number): void {
     this.selectedProfile = profile;
     this.selectedIndex = index;
