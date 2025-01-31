@@ -431,7 +431,6 @@ start()`;
 
       // ...(this.userProfile?.facebookData?.length ? ['Ken jij deze mensen nog?'] : []), // Alleen als er Facebook data is
     ];
-    console.log(this.h1TextArray);
     this.h1RotationText = this.h1TextArray[0];
     this.h1State = 'in';
 
